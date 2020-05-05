@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -18,30 +22,25 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
-        RelativeLayout myLayout = findViewById(R.id.loginLayout);
-        myLayout.clearFocus();
         TextView digiM = findViewById(R.id.digimLogoLogin);
         EditText emailLogin = findViewById(R.id.emailLogin);
         EditText passwordLogin = findViewById(R.id.passwordLogin);
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView noAccount = findViewById(R.id.noAccount);
+        RelativeLayout myLayout = findViewById(R.id.loginLayout);
+        myLayout.clearFocus();
         Animation myAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
         Animation fade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade);
         digiM.startAnimation(myAnimation);
@@ -83,22 +82,39 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void signIn(View view) {
+    public void signIn(View coordinatorLayout) {
+        InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
         EditText emailLogin = findViewById(R.id.emailLogin);
         EditText passwordLogin = findViewById(R.id.passwordLogin);
         String email = emailLogin.getText().toString();
         String password = passwordLogin.getText().toString();
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if ( task.isSuccessful() ) {
-                    Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getDisplayName() + " signed in", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Authentication error", Toast.LENGTH_SHORT).show();
-                }
+        ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+        if( activeNetwork != null && activeNetwork.isConnected() ) {
+            if ( email.length() == 0 || password.length() == 0 ) {
+                Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
             }
-        });
+            else {
+                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if ( task.isSuccessful() ) {
+                            Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getDisplayName() + " signed in", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Authentication error...\nIt seems like wrong email or password", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }
+        else if ( email.length() == 0 || password.length() == 0 ) {
+            Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
+        }
+        else {
+            Snackbar.make(coordinatorLayout,"Network error",Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void signOut() {

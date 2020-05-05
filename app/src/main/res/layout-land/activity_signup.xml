@@ -37,8 +37,9 @@
             android:layout_marginRight="1dp"
             android:layout_weight="50"
             android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
             android:hint="Name"
-            android:inputType="textEmailAddress"
+            android:inputType="textFilter"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="20sp" />
@@ -50,8 +51,9 @@
             android:layout_marginLeft="1dp"
             android:layout_weight="50"
             android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
             android:hint="Surname"
-            android:inputType="textEmailAddress"
+            android:inputType="textFilter"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="20sp" />

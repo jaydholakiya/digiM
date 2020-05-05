@@ -28,10 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/digimLogoSignup"
         android:drawableRight="@drawable/ic_verified_user_black_24dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
         android:hint="First name"
         android:layout_marginTop="40dp"
         android:textColor="#ffffff"
-        android:inputType="textEmailAddress"
+        android:inputType="textFilter"
         android:textColorHint="#ffffff"
         android:textSize="20sp" />
 
@@ -44,7 +45,8 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/firstName"
         android:textColor="#ffffff"
-        android:inputType="textEmailAddress"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        android:inputType="textFilter"
         android:textColorHint="#ffffff"
         android:textSize="20sp" />
     <EditText
