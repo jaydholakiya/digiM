@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "168495637690",
+    "firebase_url": "https://digim-9795e.firebaseio.com",
+    "project_id": "digim-9795e",
+    "storage_bucket": "digim-9795e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168495637690:android:1c9409949c974ffa804e83",
+        "android_client_info": {
+          "package_name": "com.jd.com.jnd.digim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168495637690-atm300t05e02hca48sjmmf9bj7v40uie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6ri4g5egVT_MD-Mh2djYeQ5OnvyHWhd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168495637690-atm300t05e02hca48sjmmf9bj7v40uie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168495637690:android:12666e1c936fee44804e83",
+        "android_client_info": {
+          "package_name": "com.jnd.digim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168495637690-atm300t05e02hca48sjmmf9bj7v40uie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6ri4g5egVT_MD-Mh2djYeQ5OnvyHWhd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168495637690-atm300t05e02hca48sjmmf9bj7v40uie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

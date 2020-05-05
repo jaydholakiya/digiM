@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/loginLayout"
+    android:background="@color/colorPrimaryDark"
+    android:padding="8dp"
+    android:orientation="vertical"
+    tools:context=".signupActivity">
+
+    <!--Logohover : #af9999-->
+    <TextView
+        android:id="@+id/digimLogoSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="digiM"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"/>
+
+    <LinearLayout
+        android:id="@+id/linearNames"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/digimLogoSignup"
+        android:layout_alignStart="@+id/emailSignup"
+        android:layout_alignEnd="@+id/emailSignup"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="1dp"
+            android:layout_weight="50"
+            android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="50"
+            android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:hint="Surname"
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/emailSignup"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearNames"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:drawableRight="@drawable/ic_email_black_24dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/passwordSignup"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/emailSignup"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@drawable/ic_vpn_key_black_24dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button"
+        android:layout_below="@+id/passwordSignup"
+        android:layout_marginTop="20dp"
+        android:onClick="signUp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/alreadyAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signUpBtn"
+        android:paddingTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Existing User? Sign in"
+        android:onClick="openLogin"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    android:focusableInTouchMode="true"
+    tools:context=".SplashActivity">
+
+
+    <TextView
+        android:id="@+id/digimLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="digiM"
+        android:textColor="#ffffff"
+        android:textSize="55sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:id="@+id/tagLineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/digimLogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:text="Your victory, our success..."
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+</RelativeLayout>

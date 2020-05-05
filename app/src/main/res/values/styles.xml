@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/secondary_text_dark_nodisable</item>
+        <item name="colorPrimaryDark">#706B6B</item>
+        <item name="colorAccent">#58605F</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitTransition">@android:anim/fade_out</item>
+    </style>
+
+</resources>
