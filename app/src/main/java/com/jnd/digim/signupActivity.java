@@ -113,10 +113,10 @@ public class signupActivity extends AppCompatActivity {
         EditText lastName = findViewById(R.id.lastName);
         EditText emailSignup = findViewById(R.id.emailSignup);
         EditText passwordSignup = findViewById(R.id.passwordSignup);
-        String fname = firstName.getText().toString().trim();
-        String lname = lastName.getText().toString().trim();
-        String email = emailSignup.getText().toString().trim();
-        String password = passwordSignup.getText().toString().trim();
+        String fname = firstName.getText().toString();
+        String lname = lastName.getText().toString();
+        final String email = emailSignup.getText().toString();
+        String password = passwordSignup.getText().toString();
         ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
         if( activeNetwork != null && activeNetwork.isConnected() ) {
@@ -131,7 +131,9 @@ public class signupActivity extends AppCompatActivity {
                             storeData();
                             Toast.makeText(signupActivity.this, "Sign up with : " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             View view = null;
-                            openLogin(view);
+                            Intent i = new Intent(signupActivity.this,MainActivity.class);
+                            i.putExtra("Email",email);
+                            startActivity(i);
                         }
                         else {
                             Toast.makeText(signupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();

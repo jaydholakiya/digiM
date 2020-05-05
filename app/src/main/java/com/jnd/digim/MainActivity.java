@@ -48,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
         passwordLogin.startAnimation(fade);
         loginBtn.startAnimation(fade);
         noAccount.startAnimation(fade);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if( bundle != null ) {
+            String string = (String)bundle.get("Email");
+            emailLogin.setText(string);
+        }
+        if( !emailLogin.getText().toString().isEmpty() ) {
+            Toast.makeText(this, "Please sign in with your new account", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
