@@ -3,6 +3,7 @@ package com.jnd.digim;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,6 +71,38 @@ public class MainActivity extends AppCompatActivity {
     public void openRegister(View view) {
         Intent signup = new Intent(this,signupActivity.class);
         startActivity(signup);
+    }
+
+    public void forgotPassword(View view) {
+        InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+        EditText emailForgot = findViewById(R.id.emailLogin);
+        String email = emailForgot.getText().toString();
+        final String emailReplaced = email.replace(" ","");
+        ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+        if( activeNetwork != null && activeNetwork.isConnected() ) {
+            if ( emailReplaced.length() == 0 ) {
+                Toast.makeText(this, emailReplaced, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Email is required for forgot password", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mAuth.getInstance().sendPasswordResetEmail(emailReplaced).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if ( task.isSuccessful() ) {
+                            Toast.makeText(MainActivity.this, "Check your inbox of '" + emailReplaced + "' for password reset link", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "It seems like the email you have entered is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }
+        else {
+            Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onBackPressed(){

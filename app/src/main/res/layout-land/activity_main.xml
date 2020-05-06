@@ -70,6 +70,7 @@
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:text="Forgot Password?"
+        android:onClick="forgotPassword"
         android:layout_below="@+id/loginBtn"
         android:paddingTop="20dp"
         android:layout_centerHorizontal="true"/>
