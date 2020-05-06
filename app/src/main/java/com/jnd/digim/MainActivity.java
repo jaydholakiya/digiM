@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordLogin = findViewById(R.id.passwordLogin);
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView noAccount = findViewById(R.id.noAccount);
+        TextView forgotPass = findViewById(R.id.forgotPass);
         RelativeLayout myLayout = findViewById(R.id.loginLayout);
         myLayout.clearFocus();
         Animation myAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         passwordLogin.startAnimation(fade);
         loginBtn.startAnimation(fade);
         noAccount.startAnimation(fade);
+        forgotPass.startAnimation(fade);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if( bundle != null ) {
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
+        final TextView forgotPass = findViewById(R.id.forgotPass);
+        forgotPass.setEnabled(false);
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
         EditText emailForgot = findViewById(R.id.emailLogin);
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             if ( emailReplaced.length() == 0 ) {
                 Toast.makeText(this, emailReplaced, Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Email is required for forgot password", Toast.LENGTH_SHORT).show();
+                forgotPass.setEnabled(true);
             }
             else {
                 mAuth.getInstance().sendPasswordResetEmail(emailReplaced).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -92,9 +97,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if ( task.isSuccessful() ) {
                             Toast.makeText(MainActivity.this, "Check your inbox of '" + emailReplaced + "' for password reset link", Toast.LENGTH_SHORT).show();
+                            forgotPass.setEnabled(true);
                         }
                         else {
                             Toast.makeText(MainActivity.this, "It seems like the email you have entered is wrong", Toast.LENGTH_SHORT).show();
+                            forgotPass.setEnabled(true);
                         }
                     }
                 });
@@ -102,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
+            forgotPass.setEnabled(true);
         }
     }
 
