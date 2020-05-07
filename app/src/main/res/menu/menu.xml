@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ideaMenu"
+        android:title="Ideas"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"/>
+    <item android:id="@+id/promoteMenu"
+        android:title="Promote"
+        android:icon="@drawable/ic_school_black_24dp"/>
+    <item android:id="@+id/ordersMenu"
+        android:title="My Orders"
+        android:icon="@drawable/ic_bookmark_black_24dp"/>
+</menu>

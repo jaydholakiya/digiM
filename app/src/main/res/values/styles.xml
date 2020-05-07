@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/secondary_text_dark_nodisable</item>
-        <item name="colorPrimaryDark">#706B6B</item>
-        <item name="colorAccent">#58605F</item>
+        <item name="colorPrimary">#f37736</item>
+        <item name="colorPrimaryDark">#F84A15</item>
+        <item name="colorAccent">#635E5E</item>
     </style>
 
     <style name="WindowAnimationTransition">
