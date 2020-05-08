@@ -12,8 +12,7 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashboardActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".HomeActivity"
             android:screenOrientation="nosensor"/>
         <activity android:name=".signupActivity" />
