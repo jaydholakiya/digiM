@@ -1,16 +1,23 @@
 package com.jnd.digim;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+//        SharedPreferences.Editor my = sharedPreferences.edit();
+//        my.putString("Email","jaydholakiya01@gmail.com");
+//        my.commit();
+//        Toast.makeText(this,sharedPreferences.getString("Email",null)    , Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);

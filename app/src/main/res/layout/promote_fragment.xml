@@ -15,7 +15,7 @@
         android:text="Select promotions :"
         android:textColor="@color/text"
         android:textSize="20sp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/promotions">
@@ -80,8 +80,8 @@
     <EditText
         android:id="@+id/urlLink"
         android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
         android:hint="Paste your social media URL..."
         android:inputType="textMultiLine"
         android:textColor="@color/text"
@@ -91,30 +91,43 @@
         app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/transactionId"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:hint="Transaction Id"
+        android:layout_marginTop="25dp"
+        android:inputType="text"
         android:textColor="@color/text"
-        android:hint="Mobile No."
-        android:inputType="number"
-        android:maxLength="10"
         app:layout_constraintEnd_toEndOf="@+id/urlLink"
         app:layout_constraintStart_toStartOf="@+id/urlLink"
         app:layout_constraintTop_toBottomOf="@+id/urlLink" />
 
-    <Button
-        android:id="@+id/button"
+    <EditText
+        android:id="@+id/mobileNo"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="25dp"
+        android:hint="Mobile No."
+        android:inputType="number"
+        android:maxLength="10"
+        android:textColor="@color/text"
+        app:layout_constraintEnd_toEndOf="@+id/transactionId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/transactionId"
+        app:layout_constraintTop_toBottomOf="@+id/transactionId" />
+
+    <Button
+        android:id="@+id/placeOrder"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
         android:text="Place Order"
         android:textColor="@color/text"
         android:background="@drawable/button"
-        app:layout_constraintEnd_toEndOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="@+id/mobileNo"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintStart_toStartOf="@+id/mobileNo"
+        app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

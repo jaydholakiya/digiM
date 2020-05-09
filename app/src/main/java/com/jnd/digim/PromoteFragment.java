@@ -1,42 +1,41 @@
 package com.jnd.digim;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.ArrayMap;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AlertDialogLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.okhttp.internal.DiskLruCache;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
+import static android.content.Context.MODE_PRIVATE;
+import static android.os.Build.VERSION_CODES.O;
 import static java.lang.String.valueOf;
 
 public class PromoteFragment extends Fragment {
@@ -47,6 +46,10 @@ public class PromoteFragment extends Fragment {
         final View view = inflater.inflate(R.layout.promote_fragment, container, false);
         RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.socialRadio);
         final TextView selectedText = (TextView)view.findViewById(R.id.promotionData);
+        final EditText urlLink = (EditText)view.findViewById(R.id.urlLink);
+        final EditText mobileNo = (EditText)view.findViewById(R.id.mobileNo);
+        final EditText transactionId = (EditText)view.findViewById(R.id.transactionId);
+        Button buttonOrder = (Button)view.findViewById(R.id.placeOrder);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -156,6 +159,27 @@ public class PromoteFragment extends Fragment {
                             }
                         });
                         break;
+                }
+            }
+        });
+        buttonOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Long timeStamp = System.currentTimeMillis();
+                Toast.makeText(getContext(), "URL - " + urlLink.getText().toString() + "\nTransactionId - " +  transactionId.getText().toString() + "\nMobile No. - " + mobileNo.getText().toString() + "\nPromotion - " + selectedText.getText().toString() + "\nOrder Reviewed - " + false, Toast.LENGTH_SHORT).show();
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                Integer a = Calendar.getInstance().get(Calendar.MONTH) + 1;
+                Calendar.getInstance().get(Calendar.YEAR);
+                Calendar.getInstance().get(Calendar.HOUR);
+                Calendar.getInstance().get(Calendar.MINUTE);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null) {
+                    String email = user.getEmail();
+                    Snackbar.make(getView(),email.substring(0,email.indexOf(".")), BaseTransientBottomBar.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getContext(), "User is logged out", Toast.LENGTH_SHORT).show();
                 }
             }
         });
