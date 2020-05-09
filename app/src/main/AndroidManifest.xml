@@ -12,18 +12,19 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashboardActivity"></activity>
-        <activity android:name=".HomeActivity"
-            android:screenOrientation="nosensor"/>
+        <activity android:name=".DashboardActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="nosensor" />
         <activity android:name=".signupActivity" />
         <activity android:name=".MainActivity" />
-        <activity
-            android:name=".SplashActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

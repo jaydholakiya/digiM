@@ -2,53 +2,104 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="@color/colorAccent">
 
-    <Spinner
-        android:id="@+id/promotionsList"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="84dp"
-        android:padding="5dp"
+    <TextView
+        android:id="@+id/promotions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select promotions :"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RadioGroup
+        android:id="@+id/socialRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/promotions">
+
+        <RadioButton
+            android:id="@+id/instagramRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instagram"
+            android:textColor="@color/text" />
+
+        <RadioButton
+            android:id="@+id/youtubeRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:text="Youtube" />
+
+        <RadioButton
+            android:id="@+id/facebookRadio"
+            android:textColor="@color/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Facebook" />
+
+        <RadioButton
+            android:id="@+id/twitterRadio"
+            android:textColor="@color/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Twitter" />
+
+        <RadioButton
+            android:id="@+id/tiktokRadio"
+            android:layout_width="match_parent"
+            android:textColor="@color/text"
+            android:layout_height="wrap_content"
+            android:text="TikTok" />
+    </RadioGroup>
+
     <TextView
-        android:id="@+id/selected"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:text=""
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/promotionsList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/promotionsList"
-        app:layout_constraintTop_toBottomOf="@+id/promotionsList"/>
+        android:id="@+id/promotionData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No promotion selected"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toTopOf="@+id/urlLink"
+        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
+        app:layout_constraintStart_toStartOf="@+id/socialRadio"
+        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
 
     <EditText
         android:id="@+id/urlLink"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/selected"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
         android:hint="Paste your social media URL..."
-        app:layout_constraintStart_toStartOf="@+id/selected"
-        app:layout_constraintTop_toBottomOf="@+id/selected" />
+        android:inputType="textMultiLine"
+        android:textColor="@color/text"
+        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/socialRadio"
+        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/text"
         android:hint="Mobile No."
         android:inputType="number"
+        android:maxLength="10"
         app:layout_constraintEnd_toEndOf="@+id/urlLink"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/urlLink"
         app:layout_constraintTop_toBottomOf="@+id/urlLink" />
 
@@ -56,11 +107,14 @@
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:text="Place Order"
+        android:textColor="@color/text"
+        android:background="@drawable/button"
         app:layout_constraintEnd_toEndOf="@+id/editText2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

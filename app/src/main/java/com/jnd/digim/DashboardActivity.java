@@ -38,6 +38,9 @@ public class DashboardActivity extends AppCompatActivity {
                     case R.id.ordersMenu:
                         fragment = new OrdersFragment();
                         break;
+                    case R.id.educationsMenu:
+                        fragment = new EducationFragment();
+                        break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.dashboardFrame,fragment).commit();
                 return true;

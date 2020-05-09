@@ -5,8 +5,11 @@
         android:icon="@drawable/ic_lightbulb_outline_black_24dp"/>
     <item android:id="@+id/promoteMenu"
         android:title="Promote"
-        android:icon="@drawable/ic_school_black_24dp"/>
+        android:icon="@drawable/ic_accessibility_black_24dp"/>
     <item android:id="@+id/ordersMenu"
         android:title="My Orders"
         android:icon="@drawable/ic_bookmark_black_24dp"/>
+    <item android:id="@+id/educationsMenu"
+        android:title="Education"
+        android:icon="@drawable/ic_school_black_24dp"/>
 </menu>
