@@ -1,8 +1,12 @@
 package com.jnd.digim;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,10 +54,18 @@ public class PromoteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         final String[] promotion = new String[1];
         final String[] data = new String[1];
+        if( FirebaseAuth.getInstance().getCurrentUser() != null ) {
+            Snackbar.make(container,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Snackbar.make(v,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).dismiss();
+                }
+            }).setActionTextColor(Color.RED).show();
+        }
         final FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final View view = inflater.inflate(R.layout.promote_fragment, container, false);
-        RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.socialRadio);
+        final RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.socialRadio);
         final TextView selectedText = (TextView)view.findViewById(R.id.promotionData);
         final EditText url = (EditText)view.findViewById(R.id.urlLink);
         final EditText mobileNo = (EditText)view.findViewById(R.id.mobileNo);
@@ -288,47 +301,50 @@ public class PromoteFragment extends Fragment {
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(getView(),"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).show();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null) {
-                    String order = promotion[0];
-                    String orderType = selectedText.getText().toString();
-                    UUID uuid = UUID.randomUUID();
-                    String orderId = Long.toString(uuid.getMostSignificantBits(),36) + Long.toString(uuid.getLeastSignificantBits(),36).replace("-","");
-                    Toast.makeText(getContext(), "" + orderId, Toast.LENGTH_SHORT).show();
-                    String email = user.getEmail();
-                    String orderDateTime = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" + ( Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + Calendar.getInstance().get(Calendar.YEAR) + " " + Calendar.getInstance().get(Calendar.HOUR) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
-                    String urlLink = url.getText().toString();
-                    String transactionId = transaction.getText().toString();
-                    String contactNo = mobileNo.getText().toString();
-                    Long timeStamp = System.currentTimeMillis();
-                    Boolean orderReviewed = false;
-                    databaseReference[0] = db.getReference("Orders");
-                    Order orders = new Order(order,orderType,orderId,email,orderDateTime,urlLink,transactionId,contactNo,timeStamp,orderReviewed);
-                    databaseReference[0].child(user.getDisplayName() + "_" + user.getEmail().substring(0,user.getEmail().indexOf("."))).child(databaseReference[0].push().getKey()).setValue(orders);
+                ConnectivityManager conn_Manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+                if( activeNetwork != null && activeNetwork.isConnected() ) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user!=null) {
+                        RadioButton rInstagram = (RadioButton)v.findViewById(R.id.instagramRadio);
+                        RadioButton rFacebook = (RadioButton)v.findViewById(R.id.facebookRadio);
+                        RadioButton rTwitter = (RadioButton)v.findViewById(R.id.twitterRadio);
+                        RadioButton rTikTok = (RadioButton)v.findViewById(R.id.tiktokRadio);
+                        RadioButton rYoutube = (RadioButton)v.findViewById(R.id.youtubeRadio);
+                        String order = promotion[0];
+                        String orderType = selectedText.getText().toString();
+                        UUID uuid = UUID.randomUUID();
+                        String orderId = Long.toString(uuid.getMostSignificantBits(),36) + Long.toString(uuid.getLeastSignificantBits(),36).replace("-","");
+                        String email = user.getEmail();
+                        String orderDateTime = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" + ( Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + Calendar.getInstance().get(Calendar.YEAR) + " " + Calendar.getInstance().get(Calendar.HOUR) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+                        String urlLink = url.getText().toString();
+                        String transactionId = transaction.getText().toString();
+                        String contactNo = mobileNo.getText().toString();
+                        Long timeStamp = System.currentTimeMillis();
+                        Boolean orderReviewed = false;
+                            if( orderType.equals("No promotions selected") || urlLink.length() == 0 || transactionId.length() == 0 || contactNo.length() == 0 ) {
+                                Snackbar.make(v,"All fields are required",BaseTransientBottomBar.LENGTH_LONG).show();
+                            }
+                            else if( contactNo.length() < 10 ) {
+                                Toast.makeText(getContext(), "Mobile no. should be 10 digits long", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                databaseReference[0] = db.getReference("Orders");
+                                Order orders = new Order(order, orderType, orderId, email, orderDateTime, urlLink, transactionId, contactNo, timeStamp, orderReviewed);
+                                databaseReference[0].child(user.getDisplayName() + "_" + user.getEmail().substring(0, user.getEmail().indexOf("."))).child(databaseReference[0].push().getKey()).setValue(orders);
+                                Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show();
+                                selectedText.setText("No promotions selected");
+                                url.setText("");
+                                transaction.setText("");
+                                mobileNo.setText("");
+                            }
+                    }
+                }
+                else {
+                    Toast.makeText(getContext(), "Network error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         return view;
     }
-
-//    public void placeOrder() {
-//        this.customerGuid = Guid.create();
-//        this.orderDate = new Date().getDate() + '/' + (new Date().getMonth()+1) + '/' + new Date().getFullYear() + ' ' + new Date().getHours() + ':' + new Date().getMinutes();
-//        this.db.database.ref('Orders/'+localStorage.getItem('displayName')+'_'+localStorage.getItem('email').substr(0,localStorage.getItem('email').indexOf('.'||'@'))).push({
-//                order : this.promotionForm.value.order,
-//                orderType : this.promotionForm.value.selectPromoteType,
-//                orderId : this.customerGuid.value,
-//                email : localStorage.getItem('email'),
-//                orderDateTime : this.orderDate,
-//                urlLink : this.promotionForm.value.urlLink,
-//                transactionId : this.promotionForm.value.transactionId,
-//                contactNo : this.promotionForm.value.contactNo,
-//                timeStamp : Date.now(),
-//                orderReviewed : false
-//    });
-//        this.toastr.success('Order successfully placed...','Success!');
-//        this.promotionForm.setValue({selectPromoteType:"",urlLink:"",transactionId:"",order:"",contactNo:""});
-//        this.servicesList=[];
-//    }
 }
