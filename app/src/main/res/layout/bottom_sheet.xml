@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:id="@+id/bottomDialog"
+    android:background="@drawable/bottom_sheet_background"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/shareIdeaTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/righteous"
+        android:shadowColor="@color/lightOrange"
+        android:text="Share your creative ideas here"
+        android:textColor="@color/darkOrange"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ideaTxtBox"
+        android:padding="10dp"
+        android:layout_margin="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:ems="10"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/shareIdeaTxt"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:hint="Share your creative ideas here..."
+        app:layout_constraintStart_toStartOf="@+id/shareIdeaTxt"
+        app:layout_constraintTop_toBottomOf="@+id/shareIdeaTxt" />
+
+    <ImageButton
+        android:id="@+id/postIdea"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/darkOrange"
+        android:src="@drawable/ic_check_black_24dp"
+        android:textAllCaps="false"
+        android:textColor="@color/text"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="252dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
