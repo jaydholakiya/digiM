@@ -56,6 +56,9 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
 //        if( FirebaseAuth.getInstance().getCurrentUser() != null ) {
 //            findViewById(R.id.login).setVisibility(View.INVISIBLE);
+//
+//            //For hiding menu of navigation bar
+////            ((NavigationView) findViewById(R.id.nvView)).getMenu().findItem(R.id.developerInfo).setVisible(true);
 //        }
         TextView loginTxt = findViewById(R.id.login);
         loginTxt.setOnClickListener(new View.OnClickListener() {
