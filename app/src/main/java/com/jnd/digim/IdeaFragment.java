@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -42,7 +45,7 @@ public class IdeaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.idea_fragment,container,false);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas/");
         mDatabase.keepSynced(true);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdeaCard);
         recyclerView.setHasFixedSize(true);
@@ -95,40 +98,58 @@ public class IdeaFragment extends Fragment {
         return view;
     }
 
-    public static class IdeaViewHolder extends RecyclerView.ViewHolder
-    {
-        View mView;
-        public IdeaViewHolder(View item)
-        {
-            super(item);
-            mView = item;
-        }
-        public setUniqueIdea(String uniqueIdea){
-            TextView idea = mView.findViewById(R.id.uniqueIdea);
-            idea.setText(uniqueIdea);
-        }
-        public setSenderName(String senderName){
-            TextView name = mView.findViewById(R.id.senderName);
-            name.setText(senderName);
-        }
-        public setTimeStamp(Long timeStamp){
-            TextView time = mView.findViewById(R.id.timeStamp);
-            time.setText(timeStamp);
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<IdeaGet,IdeaViewHolder>FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<IdeaGet,IdeaViewHolder>
-                (Idea.class,R.layout.idea_fragment,IdeaViewHolder.class,mDatabase) {
+        FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder> FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
+                (IdeaGet.class,R.layout.idea_card,IdeaViewHolder.class,mDatabase) {
             @Override
-            protected void populateViewHolder(IdeaViewHolder viewHolder, Idea model,int position) {
-                viewHolder.setUniqueIdea(model.getUniqueIdea());
-                viewHolder.setSenderName(model.getSenderName());
-                viewHolder.setTimeStamp(model.getTimeStamp());
+            protected void populateViewHolder(IdeaViewHolder ideaViewHolder, IdeaGet ideaGet, int i) {
+                ideaViewHolder.setUniqueIdea(ideaGet.getUniqueIdea());
+                ideaViewHolder.setSenderName(ideaGet.getSenderName());
+//                ideaViewHolder.setTimeStamp(ideaGet.getTimeStamp());
             }
         };
         recyclerView.setAdapter(FirebaseRecyclerAdapter);
+    }
+//                FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
+//                (IdeaGet.class,R.layout.bottom_sheet,mDatabase){
+//
+//            @Override
+//            protected void onBindViewHolder(@NonNull IdeaViewHolder holder,int position, @NonNull IdeaGet model) {
+//                holder.setUniqueIdea(model.getUniqueIdea());
+//                holder.setSenderName(model.getSenderName());
+//                holder.setTimeStamp(model.getTimeStamp());
+//            }
+//
+//            @NonNull
+//            @Override
+//            public IdeaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//                return null;
+//            }
+//        };
+//        recyclerView.setAdapter(FirebaseRecyclerAdapter);
+//    }
+
+    public static class IdeaViewHolder extends RecyclerView.ViewHolder
+    {
+        View mView;
+        public IdeaViewHolder(View ideaView)
+        {
+            super(ideaView);
+            mView = ideaView;
+        }
+        public void setUniqueIdea(String uniqueIdea){
+            TextView idea = (TextView)mView.findViewById(R.id.uniqueIdea);
+            idea.setText(uniqueIdea);
+        }
+        public void setSenderName(String senderName){
+            TextView name = (TextView)mView.findViewById(R.id.senderName);
+            name.setText(senderName);
+        }
+//        public void setTimeStamp(String timeStamp){
+//            TextView time = (TextView)mView.findViewById(R.id.timeStamp);
+//            time.setText(timeStamp));
+//        }
     }
 }
