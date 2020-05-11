@@ -1,5 +1,7 @@
 package com.jnd.digim;
 
+import com.github.marlonlom.utilities.timeago.TimeAgo;
+
 public class IdeaGet {
     public IdeaGet(String uniqueIdea, String senderName, long timeStamp) {
         this.uniqueIdea = uniqueIdea;
@@ -24,15 +26,15 @@ public class IdeaGet {
         this.senderName = "- " + senderName;
     }
 
-    public Long getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Long timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 
     private String uniqueIdea;
     private String senderName;
-    private Long timeStamp;
+    private long timeStamp;
 }

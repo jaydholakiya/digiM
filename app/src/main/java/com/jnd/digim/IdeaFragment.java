@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -107,7 +108,7 @@ public class IdeaFragment extends Fragment {
             protected void populateViewHolder(IdeaViewHolder ideaViewHolder, IdeaGet ideaGet, int i) {
                 ideaViewHolder.setUniqueIdea(ideaGet.getUniqueIdea());
                 ideaViewHolder.setSenderName(ideaGet.getSenderName());
-//                ideaViewHolder.setTimeStamp(ideaGet.getTimeStamp());
+                ideaViewHolder.setTimeStamp(ideaGet.getTimeStamp());
             }
         };
         recyclerView.setAdapter(FirebaseRecyclerAdapter);
@@ -147,9 +148,9 @@ public class IdeaFragment extends Fragment {
             TextView name = (TextView)mView.findViewById(R.id.senderName);
             name.setText(senderName);
         }
-//        public void setTimeStamp(String timeStamp){
-//            TextView time = (TextView)mView.findViewById(R.id.timeStamp);
-//            time.setText(timeStamp));
-//        }
+        public void setTimeStamp(long timeStamp){
+            TextView time = (TextView)mView.findViewById(R.id.timeStamp);
+            time.setText(TimeAgo.from(timeStamp));
+        }
     }
 }
