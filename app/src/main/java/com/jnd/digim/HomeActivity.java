@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void openSnackbar(View coordinatorLayout) {
-        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+        if( FirebaseAuth.getInstance().getCurrentUser() == null ){
             Snackbar snackbar = Snackbar.make(coordinatorLayout,"Please sign-in to active services",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
                 @Override
                 public void onClick(View coordinatorLayout) {
