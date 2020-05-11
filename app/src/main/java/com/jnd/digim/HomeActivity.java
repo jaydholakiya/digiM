@@ -56,9 +56,6 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
 //        if( FirebaseAuth.getInstance().getCurrentUser() != null ) {
 //            findViewById(R.id.login).setVisibility(View.INVISIBLE);
-//
-//            //For hiding menu of navigation bar
-////            ((NavigationView) findViewById(R.id.nvView)).getMenu().findItem(R.id.developerInfo).setVisible(true);
 //        }
         TextView loginTxt = findViewById(R.id.login);
         loginTxt.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void openSnackbar(View coordinatorLayout) {
-        if( FirebaseAuth.getInstance().getCurrentUser() == null ){
+        if(FirebaseAuth.getInstance().getCurrentUser()==null){
             Snackbar snackbar = Snackbar.make(coordinatorLayout,"Please sign-in to active services",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
                 @Override
                 public void onClick(View coordinatorLayout) {
