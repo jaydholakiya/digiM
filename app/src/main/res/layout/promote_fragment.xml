@@ -129,5 +129,4 @@
         app:layout_constraintStart_toStartOf="@+id/mobileNo"
         app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,16 +54,22 @@ public class PromoteFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        FirebaseDatabase.getInstance().getReference().child("lineData").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue(Integer.class).toString().equals("1")){
+                    Snackbar.make(container,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Snackbar.make(v,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).dismiss();
+                        }
+                    }).setActionTextColor(Color.RED).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}});
         final String[] promotion = new String[1];
         final String[] data = new String[1];
-        if( FirebaseAuth.getInstance().getCurrentUser() != null ) {
-            Snackbar.make(container,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v,"Please pay us on paytm before filling the form",BaseTransientBottomBar.LENGTH_INDEFINITE).dismiss();
-                }
-            }).setActionTextColor(Color.RED).show();
-        }
         final FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final View view = inflater.inflate(R.layout.promote_fragment, container, false);
