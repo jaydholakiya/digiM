@@ -4,56 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     android:background="@color/colorPrimaryDark"
     tools:context=".HomeActivity">
 
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselView"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/navDrawer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="428dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:fillColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/digimLogoLogin"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/digimLogoLogin"
-        app:layout_constraintTop_toBottomOf="@+id/digimLogoLogin"
-        app:layout_constraintVertical_bias="0.307"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="4000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="5dp">
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/digimLogoHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/righteous"
-        android:text="digiM"
-        android:textColor="#ffffff"
-        android:textSize="55sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <FrameLayout
+                android:id="@+id/dashboardFrame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
-    <TextView
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/righteous"
-        android:text="Login"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/carouselView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.813"
-        app:layout_constraintStart_toEndOf="@+id/digimLogoHome"
-        app:layout_constraintTop_toTopOf="@+id/digimLogoHome"
-        app:layout_constraintVertical_bias="0.171" />
+
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/carouselView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:layout_marginTop="80dp"
+                    app:fillColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:pageColor="#00000000"
+                    app:radius="6dp"
+                    app:slideInterval="4000"
+                    app:strokeColor="#FF777777"
+                    app:strokeWidth="1dp">
+                </com.synnapps.carouselview.CarouselView>
+
+            </FrameLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nvView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/drawer_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+    <!--    <TextView-->
+<!--        android:id="@+id/digimLogoHome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/righteous"-->
+<!--        android:text="digiM"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:textSize="55sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/login"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:fontFamily="@font/righteous"-->
+<!--        android:text="Login"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/carouselView"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.813"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/digimLogoHome"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/digimLogoHome"-->
+<!--        app:layout_constraintVertical_bias="0.171" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
