@@ -14,10 +14,34 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:navigationIcon="@drawable/ic_menu_24dp"
-        app:title="digiM"
-        app:titleTextColor="@color/text"
-        app:layout_constraintStart_toStartOf="parent">
+        app:showAsAction="always|withText"
+        app:titleTextColor="@color/text">
+
+<!--        <TextView-->
+<!--            android:id="@+id/login"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="13dp"-->
+<!--            android:fontFamily="@font/righteous"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Login"-->
+<!--            android:textColor="@color/text"-->
+<!--            android:textSize="20sp" />-->
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/righteous"
+            android:gravity="center"
+            android:text="Login"
+            android:layout_gravity="right"
+            android:layout_marginEnd="13dp"
+            android:textColor="@color/text"
+            android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>
