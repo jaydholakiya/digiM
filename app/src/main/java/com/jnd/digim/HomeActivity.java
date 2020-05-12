@@ -123,6 +123,9 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.developerInfo:
                 fragmentClass = DeveloperInfo.class;
                 break;
+            case R.id.video:
+                fragmentClass = VideoFragment.class;
+                break;
         }
         try {
             fragment = (Fragment)fragmentClass.newInstance();

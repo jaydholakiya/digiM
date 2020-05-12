@@ -13,4 +13,9 @@
         <item>TikTok</item>
         <item>Twitter</item>
     </string-array>
+
+    <string name="aboutText">-- digiM is providing the digital web application platform for marketing as well as educational platform for the digital marketing strategy. Apart of these two features there are feature called "Ideas" in which user can share their ideas as a formate of text or images.\n
+            \n-- EDUCATION feature is kind of Informative education part where all the digital marketing strategy and the factors are describe by the Admin.\n
+        \n-- PROMOTE is feature where user can promote their social media profile as a personal profile or brand and maximize their reach towards the large digital world digiM is web portal so the technologies and programming languages will php, html, css, javascript, jquery and needed API so basically digiM is platform for marketing and promotions where user can learn digital marketing also.</string>
+
 </resources>

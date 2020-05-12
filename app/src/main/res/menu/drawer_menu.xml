@@ -13,5 +13,9 @@
             android:id="@+id/developerInfo"
             android:icon="@drawable/ic_developer_info_24dp"
             android:title="Developer Info"/>
+        <item
+            android:id="@+id/video"
+            android:icon="@drawable/ic_video"
+            android:title="Video"/>
     </group>
 </menu>
