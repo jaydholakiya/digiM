@@ -114,6 +114,9 @@ public class HomeActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass = null;
         switch (item.getItemId()) {
+            case R.id.working:
+                fragmentClass = Working.class;
+                break;
             case R.id.aboutUs:
                 fragmentClass = AboutUs.class;
                 break;
