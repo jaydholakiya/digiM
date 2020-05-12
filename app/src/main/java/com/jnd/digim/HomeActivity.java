@@ -1,5 +1,6 @@
 package com.jnd.digim;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -49,25 +52,32 @@ public class HomeActivity extends AppCompatActivity {
         nvDrawer = (NavigationView)findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nvView);
+        View headerView = navigationView.getHeaderView(0);
+        TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderHome);
+        digiMLogoDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,SplashActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        TextView login = (TextView)findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(HomeActivity.this,SigninActivity.class);
+                startActivity(loginIntent);
+            }
+        });
+
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(images.length);
         carouselView.setImageListener(imageListener);
         openSnackbar(carouselView);
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
-//        if( FirebaseAuth.getInstance().getCurrentUser() != null ) {
-//            findViewById(R.id.login).setVisibility(View.INVISIBLE);
-//
-//        //For hiding menu of navigation drawer
-//            ((NavigationView) findViewById(R.id.nvView)).getMenu().findItem(R.id.developerInfo).setVisible(false);
-//        }
-        TextView loginTxt = findViewById(R.id.login);
-        loginTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void openSnackbar(View coordinatorLayout) {
@@ -80,7 +90,10 @@ public class HomeActivity extends AppCompatActivity {
             });
             snackbar.setActionTextColor(Color.RED);
             snackbar.show();
+            findViewById(R.id.login).setVisibility(View.VISIBLE);
+            ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.myDashboard).setVisible(false);
         }
+        else findViewById(R.id.login).setVisibility(View.INVISIBLE);
     }
 
     ImageListener imageListener = new ImageListener() {
@@ -104,7 +117,14 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectDrawerItem(item);
+                if(item.getItemId() == R.id.myDashboard){
+                        Intent loginIntent = new Intent(HomeActivity.this, DashboardActivity.class);
+                        startActivity(loginIntent);
+                        finish();
+                }
+                else {
+                    selectDrawerItem(item);
+                }
                 return true;
             }
         });
@@ -138,19 +158,35 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.dashboardFrame,fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.homeFrame,fragment).commit();
         item.setChecked(true);
         setTitle(item.getTitle());
         mDrawer.closeDrawers();
     }
-
-
 
     @Override
     public void onBackPressed() {
         if(this.mDrawer.isDrawerOpen(GravityCompat.START)) {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
-        else super.onBackPressed();
+        else{
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Exit");
+                alert.setMessage("Are you sure?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alert.setCancelable(false);
+                alert.show();
+            }
     }
 }

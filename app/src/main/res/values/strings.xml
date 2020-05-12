@@ -18,4 +18,9 @@
             \n-- EDUCATION feature is kind of Informative education part where all the digital marketing strategy and the factors are describe by the Admin.\n
         \n-- PROMOTE is feature where user can promote their social media profile as a personal profile or brand and maximize their reach towards the large digital world digiM is web portal so the technologies and programming languages will php, html, css, javascript, jquery and needed API so basically digiM is platform for marketing and promotions where user can learn digital marketing also.</string>
 
+    <string name="working">
+        Nowadays, so many people are facing some problems in the growth of business . So this is for the growth and development of the business by different categories . So this is the site for the promotion of the social medias like: Facebook,Instagam,Twitter,
+TikTok etc. You can do the promotion or a kind of marketing with this site. And it also works like you can send a request and use our different services and can promote your social media accounts.
+    </string>
+
 </resources>

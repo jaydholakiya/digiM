@@ -9,7 +9,7 @@
     android:padding="30dp"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
+    tools:context=".SigninActivity">
 
 <!--Logohover : #af9999-->
     <TextView
@@ -80,7 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/forgotPass"
         android:paddingTop="20dp"
-        android:onClick="openRegister"
         android:layout_centerHorizontal="true"
         android:text="@string/no_account"
         android:textColor="#ffffff"

@@ -22,19 +22,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.Map;
-
-public class MainActivity extends AppCompatActivity {
+public class SigninActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
@@ -67,18 +59,14 @@ public class MainActivity extends AppCompatActivity {
         if( !emailLogin.getText().toString().isEmpty() ) {
             Toast.makeText(this, "Please sign in with your new account", Toast.LENGTH_LONG).show();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        //Pending new layout for sign in
-    }
-
-    public void openRegister(View view) {
-        Intent signup = new Intent(this,signupActivity.class);
-        startActivity(signup);
+        noAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUp = new Intent(SigninActivity.this,SignupActivity.class);
+                startActivity(signUp);
+                finish();
+            }
+        });
     }
 
     public void forgotPassword(View view) {
@@ -102,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if ( task.isSuccessful() ) {
-                            Toast.makeText(MainActivity.this, "Check your inbox of '" + emailReplaced + "' for password reset link", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SigninActivity.this, "Check your inbox of '" + emailReplaced + "' for password reset link", Toast.LENGTH_SHORT).show();
                             forgotPass.setEnabled(true);
                         }
                         else {
-                            Toast.makeText(MainActivity.this, "It seems like the email you have entered is wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SigninActivity.this, "It seems like the email you have entered is wrong", Toast.LENGTH_SHORT).show();
                             forgotPass.setEnabled(true);
                         }
                     }
@@ -117,26 +105,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
             forgotPass.setEnabled(true);
         }
-    }
-
-    public void onBackPressed(){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Exit");
-        alert.setMessage("Are you sure?");
-        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        alert.setCancelable(false);
-        alert.show();
     }
 
     public void signIn(View coordinatorLayout) {
@@ -153,14 +121,17 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
             }
             else {
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if ( task.isSuccessful() ) {
-                            Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getDisplayName() + " signed in", Toast.LENGTH_SHORT).show();
+                            Intent dashboardIntent = new Intent(SigninActivity.this,DashboardActivity.class);
+                            startActivity(dashboardIntent);
+                            finish();
+                            Toast.makeText(SigninActivity.this, "Signin succesfully", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(MainActivity.this, "Authentication error...\nIt seems like wrong email or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SigninActivity.this, "Authentication error...\nIt seems like wrong email or password", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -186,12 +157,12 @@ public class MainActivity extends AppCompatActivity {
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                Map<String,Object> map = (Map<String, Object>) dataSnapshot.getValue();
 ////                String value = dataSnapshot.getValue(String.class);
-//                Toast.makeText(MainActivity.this, "Value is : \n" + map, Toast.LENGTH_LONG).show();
+//                Toast.makeText(SigninActivity.this, "Value is : \n" + map, Toast.LENGTH_LONG).show();
 //            }
 //
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(MainActivity.this, "Failed to read value : " + databaseError.toException(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SigninActivity.this, "Failed to read value : " + databaseError.toException(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
 //    }

@@ -34,7 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class signupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Map<String, Object> Users = new HashMap<>();
 
@@ -62,6 +62,13 @@ public class signupActivity extends AppCompatActivity {
         passwordSignup.startAnimation(fade);
         signUpBtn.startAnimation(fade);
         alreadyAccount.startAnimation(fade);
+        alreadyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent login = new Intent(SignupActivity.this,SigninActivity.class);
+                startActivity(login);
+            }
+        });
     }
 
     public void storeData() {
@@ -88,7 +95,7 @@ public class signupActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(signupActivity.this, "Error adding document - " + e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Error adding document - " + e, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -100,11 +107,6 @@ public class signupActivity extends AppCompatActivity {
         }
     });
 }
-
-    public void openLogin(View view) {
-        Intent login = new Intent(signupActivity.this,MainActivity.class);
-        startActivity(login);
-    }
 
     public void signUp(View coordinatorLayout) {
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -129,14 +131,14 @@ public class signupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if ( task.isSuccessful() ) {
                             storeData();
-                            Toast.makeText(signupActivity.this, "Sign up with : " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Sign up with : " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             View view = null;
-                            Intent i = new Intent(signupActivity.this,MainActivity.class);
+                            Intent i = new Intent(SignupActivity.this, SigninActivity.class);
                             i.putExtra("Email",email);
                             startActivity(i);
                         }
                         else {
-                            Toast.makeText(signupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

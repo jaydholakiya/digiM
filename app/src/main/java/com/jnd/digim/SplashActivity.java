@@ -9,6 +9,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashActivity extends AppCompatActivity
 {
     @Override
@@ -31,9 +33,16 @@ public class SplashActivity extends AppCompatActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-            Intent i = new Intent(SplashActivity.this,HomeActivity.class);
-            startActivity(i);
-            finish();
+                if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+                    Intent dashboardIntent = new Intent(SplashActivity.this,DashboardActivity.class);
+                    startActivity(dashboardIntent);
+                    finish();
+                }
+                else{
+                    Intent HomeIntent = new Intent(SplashActivity.this,HomeActivity.class);
+                    startActivity(HomeIntent);
+                    finish();
+                }
             }
         },2000);
     }

@@ -8,7 +8,7 @@
     android:background="@color/colorPrimaryDark"
     android:padding="8dp"
     android:orientation="vertical"
-    tools:context=".signupActivity">
+    tools:context=".SignupActivity">
 
     <!--Logohover : #af9999-->
     <TextView

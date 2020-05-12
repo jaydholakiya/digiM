@@ -8,7 +8,7 @@
     android:background="@color/colorPrimaryDark"
     android:padding="8dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SigninActivity">
 
 <!--Logohover : #af9999-->
 

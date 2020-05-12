@@ -9,7 +9,7 @@
     android:padding="30dp"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
+    tools:context=".SigninActivity">
 
     <!--Logohover : #af9999-->
     <TextView
@@ -95,7 +95,6 @@
         android:paddingTop="40dp"
         android:layout_centerHorizontal="true"
         android:text="Existing User? Sign in"
-        android:onClick="openLogin"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 </RelativeLayout>
