@@ -2,6 +2,7 @@ package com.jnd.digim;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -35,6 +37,9 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNav);
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.homeMain).setVisible(false);
+        }
+        else{
+            findViewById(R.id.login).setVisibility(View.INVISIBLE);
         }
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -127,9 +132,11 @@ public class DashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.changePass:
                 fragmentClass = ChangePassword.class;
+                bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.rateUs:
                 fragmentClass = RateUs.class;
+                bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
         }
 
@@ -147,15 +154,29 @@ public class DashboardActivity extends AppCompatActivity {
         mDrawer.closeDrawers();
     }
 
-
-
     @Override
     public void onBackPressed() {
         if(this.mDrawer.isDrawerOpen(GravityCompat.START)) {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
         else{
-            super.onBackPressed();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Exit");
+            alert.setMessage("Are you sure?");
+            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alert.setCancelable(false);
+            alert.show();
         }
     }
 }

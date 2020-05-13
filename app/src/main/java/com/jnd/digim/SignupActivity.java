@@ -67,6 +67,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent login = new Intent(SignupActivity.this,SigninActivity.class);
                 startActivity(login);
+                finish();
             }
         });
     }
@@ -136,6 +137,7 @@ public class SignupActivity extends AppCompatActivity {
                             Intent i = new Intent(SignupActivity.this, SigninActivity.class);
                             i.putExtra("Email",email);
                             startActivity(i);
+                            finish();
                         }
                         else {
                             Toast.makeText(SignupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();

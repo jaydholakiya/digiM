@@ -339,7 +339,7 @@ public class PromoteFragment extends Fragment {
                             else {
                                 databaseReference[0] = db.getReference("Orders");
                                 Order orders = new Order(order, orderType, orderId, email, orderDateTime, urlLink, transactionId, contactNo, timeStamp, orderReviewed);
-                                databaseReference[0].child(user.getDisplayName() + "_" + user.getEmail().substring(0, user.getEmail().indexOf("."))).child(databaseReference[0].push().getKey()).setValue(orders);
+                                databaseReference[0].child(user.getDisplayName() + "_" + user.getEmail().substring(0, user.getEmail().indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid()).child(databaseReference[0].push().getKey()).setValue(orders);
                                 Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show();
                                 selectedText.setText("No promotions selected");
                                 url.setText("");
