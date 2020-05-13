@@ -1,7 +1,5 @@
 package com.jnd.digim;
 
-import android.widget.EditText;
-
 public class Idea {
     String uniqueIdea;
     String ideaId;
@@ -15,7 +13,7 @@ public class Idea {
         this.timeStamp = timeStamp;
     }
 
-//    public void Idea() {}
+    public void Idea() {}
 
     public String getUniqueIdea() {
         return uniqueIdea;
