@@ -1,26 +1,20 @@
 package com.jnd.digim;
 
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,8 +23,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -60,7 +52,7 @@ public class IdeaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheet);
-                final View bottomSheet = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_sheet,(ConstraintLayout)v.findViewById(R.id.bottomDialog));
+                final View bottomSheet = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_sheet_ideas,(ConstraintLayout)v.findViewById(R.id.bottomDialog));
                 bottomSheet.findViewById(R.id.postIdea).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -114,7 +106,7 @@ public class IdeaFragment extends Fragment {
         recyclerView.setAdapter(FirebaseRecyclerAdapter);
     }
 //                FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
-//                (IdeaGet.class,R.layout.bottom_sheet,mDatabase){
+//                (IdeaGet.class,R.layout.bottom_sheet_ideas,mDatabase){
 //
 //            @Override
 //            protected void onBindViewHolder(@NonNull IdeaViewHolder holder,int position, @NonNull IdeaGet model) {
