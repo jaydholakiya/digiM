@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,23 +25,31 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnInitializedListener {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     CarouselView carouselView;
+
     int[] images = {
             R.drawable.firbanner,
             R.drawable.secbanner,
             R.drawable.thirbanner
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -58,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         digiMLogoDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,SplashActivity.class);
+                Intent intent = new Intent(HomeActivity.this,HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -78,6 +87,29 @@ public class HomeActivity extends AppCompatActivity {
         carouselView.setImageListener(imageListener);
         openSnackbar(carouselView);
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
+
+
+//        YouTubePlayerView youTubePlayerView = findViewById(R.id.youTube);
+//        YouTubePlayer.OnInitializedListener onInitializedListener;
+//
+//        onInitializedListener = new YouTubePlayer.OnInitializedListener() {
+//            @Override
+//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+//                youTubePlayer.loadVideo("0trAMd1GYVc");
+//            }
+//
+//            @Override
+//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+//
+//            }
+//        };
+//
+//        youTubePlayerView.initialize(YouTubeConfig.getApiKey(),onInitializedListener);
+
+        YouTubePlayerFragment youTubePlayerFragment =
+                (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youTube);
+
+        youTubePlayerFragment.initialize(YouTubeConfig.getApiKey(),this);
     }
 
     public void openSnackbar(View coordinatorLayout) {
@@ -189,4 +221,15 @@ public class HomeActivity extends AppCompatActivity {
                 alert.show();
             }
     }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        youTubePlayer.loadVideo("0trAMd1GYVc");
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+    }
 }
+

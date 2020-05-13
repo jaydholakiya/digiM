@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="5dp">
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
@@ -20,10 +21,9 @@
 
             <FrameLayout
                 android:id="@+id/homeFrame"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
 
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/carouselView"
@@ -35,15 +35,24 @@
                     app:fillColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:pageColor="#00000000"
                     app:radius="6dp"
                     app:slideInterval="4000"
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp">
                 </com.synnapps.carouselview.CarouselView>
 
-            </FrameLayout>
+                <fragment
+                    android:id="@+id/youTube"
+                    android:name="com.google.android.youtube.player.YouTubePlayerFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:layout_marginTop="320dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </FrameLayout>
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nvView"
             android:layout_width="wrap_content"
@@ -52,6 +61,7 @@
             android:background="@android:color/white"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/home_menu" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
     <!--    <TextView-->
 <!--        android:id="@+id/digimLogoHome"-->
