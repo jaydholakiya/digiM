@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_marginTop="70dp"
+        android:layout_marginBottom="55dp"
         android:padding="5dp"
-        android:layout_marginBottom="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shareIdea"
         android:layout_width="wrap_content"

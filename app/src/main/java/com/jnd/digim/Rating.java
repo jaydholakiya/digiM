@@ -7,15 +7,18 @@ public class Rating {
     String complain;
     Long complainTime;
     String complainId;
-    Float starRating;
+    String starRating;
 
-    public Rating(String complaineeName, String email, String complain, Long complainTime, String complainId, Float starRating) {
+    public Rating(String complaineeName, String email, String complain, Long complainTime, String complainId, String starRating) {
         this.complaineeName = complaineeName;
         this.email = email;
         this.complain = complain;
         this.complainTime = complainTime;
         this.complainId = complainId;
         this.starRating = starRating;
+    }
+
+    public Rating(String complaineeName, String email, String complain, Long complainTime, String complainId, Float starRating) {
     }
 
     public void Rating() {}
@@ -60,11 +63,11 @@ public class Rating {
         this.complainId = complainId;
     }
 
-    public Float getStarRating() {
+    public String getStarRating() {
         return starRating;
     }
 
     public void setStarRating(Float starRating) {
-        this.starRating = starRating;
+        this.starRating = starRating + " out of 5";
     }
 }

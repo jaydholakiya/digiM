@@ -1,7 +1,5 @@
 package com.jnd.digim;
 
-import com.github.marlonlom.utilities.timeago.TimeAgo;
-
 public class IdeaGet {
     public IdeaGet(String uniqueIdea, String senderName, long timeStamp) {
         this.uniqueIdea = uniqueIdea;
