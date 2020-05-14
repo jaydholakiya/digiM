@@ -47,7 +47,6 @@ public class IdeaFragment extends Fragment {
         final FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final FloatingActionButton idea = (FloatingActionButton)view.findViewById(R.id.shareIdea);
-        final ImageButton postIdea = (ImageButton)view.findViewById(R.id.postIdea);
         idea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
