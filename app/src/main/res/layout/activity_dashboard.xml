@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/text"
     tools:context=".DashboardActivity">
 
@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="5dp">
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
@@ -21,7 +22,8 @@
         <FrameLayout
             android:id="@+id/dashboardFrame"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_marginTop="79dp"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
         </FrameLayout>
 
@@ -33,7 +35,9 @@
             android:background="@android:color/white"
             app:headerLayout="@layout/dashboard_header"
             app:menu="@menu/dashboard_menu" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

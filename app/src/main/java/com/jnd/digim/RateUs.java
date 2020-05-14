@@ -67,7 +67,6 @@ public class RateUs extends Fragment {
                 });
             }
         });
-
         return view;
     }
 }

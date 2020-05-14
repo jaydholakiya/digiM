@@ -43,8 +43,14 @@ public class DashboardActivity extends AppCompatActivity {
         }
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.openDrawer(GravityCompat.START);
+            }
+        });
         setTitle("My Dashboard");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDrawer = (DrawerLayout)findViewById(R.id.navDrawer);
         nvDrawer = (NavigationView)findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
@@ -88,16 +94,6 @@ public class DashboardActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void setupDrawerContent(NavigationView navigationView){
@@ -160,23 +156,30 @@ public class DashboardActivity extends AppCompatActivity {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
         else{
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Exit");
-            alert.setMessage("Are you sure?");
-            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            alert.setCancelable(false);
-            alert.show();
+            if(getTitle().equals("Rate Us") || getTitle().equals("Change Password")){
+                Intent i = new Intent(DashboardActivity.this,DashboardActivity.class);
+                startActivity(i);
+                finish();
+            }
+            else{
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Exit");
+                alert.setMessage("Are you sure?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alert.setCancelable(false);
+                alert.show();
+            }
         }
     }
 }

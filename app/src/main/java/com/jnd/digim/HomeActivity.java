@@ -57,6 +57,13 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         setSupportActionBar(toolbar);
         setTitle("digiM");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.openDrawer(GravityCompat.START);
+            }
+        });
         mDrawer = (DrawerLayout)findViewById(R.id.navDrawer);
         nvDrawer = (NavigationView)findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
@@ -135,16 +142,6 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         }
     };
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void setupDrawerContent(NavigationView navigationView){
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -201,25 +198,34 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         if(this.mDrawer.isDrawerOpen(GravityCompat.START)) {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
-        else{
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setTitle("Exit");
-                alert.setMessage("Are you sure?");
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alert.setCancelable(false);
-                alert.show();
-            }
+
+        else if(getTitle().equals("Working") || getTitle().equals("About Us") || getTitle().equals("Contact Us") || getTitle().equals("Developer Info") || getTitle().equals("Video"))
+        {
+            Intent i = new Intent(HomeActivity.this, HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        else
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Exit");
+            alert.setMessage("Are you sure?");
+            alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alert.setCancelable(false);
+            alert.show();
+        }
     }
 
     @Override
@@ -232,4 +238,3 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
 
     }
 }
-
