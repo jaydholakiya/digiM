@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/grey"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,8 +10,8 @@
         android:id="@+id/contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contact Us"
         android:fontFamily="@font/righteous"
+        android:text="Contact Us"
         android:textColor="@color/text"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.107" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.559">
+        app:layout_constraintVertical_bias="0.798">
 
         <ImageView
             android:id="@+id/facebookIcon"
@@ -72,6 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/twitter_icon" />
+
         <ImageView
             android:id="@+id/linkedinIcon"
             android:layout_width="40dp"
@@ -84,7 +85,6 @@
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/linkedin_icon" />
-
 
 
     </LinearLayout>
@@ -100,9 +100,10 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/address"
@@ -116,10 +117,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commuAddress"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.018" />
 
     <TextView
         android:id="@+id/commuEmail"
@@ -131,9 +132,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commuAddress"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.204" />
 
     <!--    <com.google.android.gms.maps.MapView-->
 <!--        android:id="@+id/map"-->

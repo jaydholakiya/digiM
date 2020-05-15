@@ -175,9 +175,6 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             case R.id.developerInfo:
                 fragmentClass = DeveloperInfo.class;
                 break;
-            case R.id.video:
-                fragmentClass = VideoFragment.class;
-                break;
         }
         try {
             fragment = (Fragment)fragmentClass.newInstance();
@@ -199,7 +196,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
 
-        else if(getTitle().equals("Working") || getTitle().equals("About Us") || getTitle().equals("Contact Us") || getTitle().equals("Developer Info") || getTitle().equals("Video"))
+        else if(getTitle().equals("Working") || getTitle().equals("About Us") || getTitle().equals("Contact Us") || getTitle().equals("Developer Info") )
         {
             Intent i = new Intent(HomeActivity.this, HomeActivity.class);
             startActivity(i);

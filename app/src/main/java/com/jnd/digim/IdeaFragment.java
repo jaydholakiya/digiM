@@ -49,7 +49,7 @@ public class IdeaFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas/");
         mDatabase.keepSynced(true);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdeaCard);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdea);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -57,7 +57,7 @@ public class IdeaFragment extends Fragment {
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final FloatingActionButton idea = (FloatingActionButton)view.findViewById(R.id.shareIdea);
         idea.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
+//            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 //                NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
@@ -164,24 +164,6 @@ public class IdeaFragment extends Fragment {
         };
         recyclerView.setAdapter(FirebaseRecyclerAdapter);
     }
-//                FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
-//                (IdeaGet.class,R.layout.bottom_sheet_ideas,mDatabase){
-//
-//            @Override
-//            protected void onBindViewHolder(@NonNull IdeaViewHolder holder,int position, @NonNull IdeaGet model) {
-//                holder.setUniqueIdea(model.getUniqueIdea());
-//                holder.setSenderName(model.getSenderName());
-//                holder.setTimeStamp(model.getTimeStamp());
-//            }
-//
-//            @NonNull
-//            @Override
-//            public IdeaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                return null;
-//            }
-//        };
-//        recyclerView.setAdapter(FirebaseRecyclerAdapter);
-//    }
 
     public static class IdeaViewHolder extends RecyclerView.ViewHolder
     {
