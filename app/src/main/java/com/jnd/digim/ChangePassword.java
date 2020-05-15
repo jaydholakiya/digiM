@@ -26,9 +26,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePassword extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         final View view = inflater.inflate(R.layout.change_password,container,false);
         final EditText pass = (EditText) view.findViewById(R.id.pass);
         Button change = (Button)view.findViewById(R.id.change);

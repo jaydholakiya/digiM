@@ -40,14 +40,15 @@
         android:id="@+id/concept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/righteous"
         android:text="Concept by :"
         android:textColor="@color/text"
         android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/yash"
         app:layout_constraintEnd_toEndOf="@+id/jay"
         app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toStartOf="@+id/jay"
-        tools:layout_editor_absoluteY="224dp" />
+        app:layout_constraintStart_toStartOf="@+id/jay" />
 
     <TextView
         android:id="@+id/yash"

@@ -4,6 +4,9 @@
         <item android:id="@+id/homeMain"
             android:title="Home"
             android:icon="@drawable/ic_home"/>
+        <item android:id="@+id/editProfile"
+            android:title="Edit Profile"
+            android:icon="@drawable/ic_edit_black_24dp"/>
         <item android:id="@+id/changePass"
             android:title="Change Password"
             android:icon="@drawable/ic_change_password"/>

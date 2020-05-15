@@ -57,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView)findViewById(R.id.nvView);
         View headerView = navigationView.getHeaderView(0);
         TextView username = (TextView)headerView.findViewById(R.id.username);
+
         TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderDashboard);
         digiMLogoDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,10 @@ public class DashboardActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass = null;
         switch (item.getItemId()) {
+            case R.id.editProfile:
+                fragmentClass = EditProfile.class;
+                bottomNavigationView.setVisibility(View.INVISIBLE);
+                break;
             case R.id.changePass:
                 fragmentClass = ChangePassword.class;
                 bottomNavigationView.setVisibility(View.INVISIBLE);
@@ -156,7 +161,7 @@ public class DashboardActivity extends AppCompatActivity {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
         else{
-            if(getTitle().equals("Rate Us") || getTitle().equals("Change Password")){
+            if(getTitle().equals("Edit Profile") || getTitle().equals("Change Password") || getTitle().equals("Rate Us")){
                 Intent i = new Intent(DashboardActivity.this,DashboardActivity.class);
                 startActivity(i);
                 finish();
