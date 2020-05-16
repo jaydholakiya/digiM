@@ -1,6 +1,8 @@
 package com.jnd.digim;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +25,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.File;
 
 public class ContactUs extends Fragment implements OnMapReadyCallback {
 
@@ -42,6 +47,7 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_us,container,false);
+        Context context = null;
         MapView mapView = (MapView)view.findViewById(R.id.map);
         ImageView facebookIcon = (ImageView)view.findViewById(R.id.facebookIcon);
         facebookIcon.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +85,17 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        TextView email = (TextView)view.findViewById(R.id.commuEmail);
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("email/text");
+                i.putExtra(Intent.EXTRA_EMAIL,new String[]{"socialmefgi@gmail.com"});
+                startActivity(Intent.createChooser(i,"Send Email"));
+            }
+        });
+
 //        mapView = (MapView)view.findViewById(R.id.map);
 //        mapView.onCreate(savedInstanceState);
 //        mapView.getMapAsync(this);
@@ -89,8 +106,8 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(21.5222,70.4579)).title("Suyog Bunglows").snippet("Communication Address"));
-        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(21.5222,70.4579)).zoom(16).bearing(0).tilt(45).build();
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(19.169257,73.341601)).title("Suyog Bunglows").snippet("Communication Address"));
+        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(19.169257,73.341601)).zoom(16).bearing(0).tilt(45).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Suyog));
     }
 
