@@ -1,6 +1,10 @@
 package com.jnd.digim;
 
 public class IdeaGet {
+    private String uniqueIdea;
+    private String senderName;
+    private long timeStamp;
+
     public IdeaGet(String uniqueIdea, String senderName, long timeStamp) {
         this.uniqueIdea = uniqueIdea;
         this.senderName = senderName;
@@ -31,8 +35,4 @@ public class IdeaGet {
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
-
-    private String uniqueIdea;
-    private String senderName;
-    private long timeStamp;
 }

@@ -1,5 +1,6 @@
 package com.jnd.digim;
 
+import android.app.ActionBar;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -46,7 +47,6 @@ public class IdeaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.idea_fragment,container,false);
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas/");
         mDatabase.keepSynced(true);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdea);
@@ -152,6 +152,7 @@ public class IdeaFragment extends Fragment {
 
     @Override
     public void onStart() {
+
         super.onStart();
         FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder> FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
                 (IdeaGet.class,R.layout.idea_card,IdeaViewHolder.class,mDatabase) {

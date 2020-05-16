@@ -17,16 +17,32 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ContactUs extends Fragment {
+public class ContactUs extends Fragment implements OnMapReadyCallback {
+
+    GoogleMap googleMap;
     MapView mapView;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(mapView!=null){
+            mapView.onCreate(null);
+            mapView.onResume();
+            mapView.getMapAsync(this);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_us,container,false);
-
+        MapView mapView = (MapView)view.findViewById(R.id.map);
         ImageView facebookIcon = (ImageView)view.findViewById(R.id.facebookIcon);
         facebookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +83,15 @@ public class ContactUs extends Fragment {
 //        mapView.onCreate(savedInstanceState);
 //        mapView.getMapAsync(this);
         return view;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(21.5222,70.4579)).title("Suyog Bunglows").snippet("Communication Address"));
+        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(21.5222,70.4579)).zoom(16).bearing(0).tilt(45).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Suyog));
     }
 
 //    @Override
