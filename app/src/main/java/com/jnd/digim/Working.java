@@ -32,6 +32,7 @@ public class Working extends Fragment {
             public void onClick(View v) {
                 Intent pdfView = new Intent(getActivity(), PdfView.class);
                 startActivity(pdfView);
+                getActivity().finish();
             }
         });
         return view;

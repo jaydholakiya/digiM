@@ -54,14 +54,20 @@ public class EditProfile extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if ( task.isSuccessful() ) {
-                    try {
-                        JSONObject json = new JSONObject(task.getResult().getData());
-                        firstNameEdit.setText(json.getString("firstname"));
-                        lastNameEdit.setText(json.getString("lastname"));
-//                        emailEdit.setText(json.getString("email"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                        ConnectivityManager conn_Manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                        NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+                        if( activeNetwork != null && activeNetwork.isConnected() ) {
+                            try {
+                                JSONObject json = new JSONObject(task.getResult().getData().toString());
+                                firstNameEdit.setText(json.getString("firstname"));
+                                lastNameEdit.setText(json.getString("lastname"));
+    //                            emailEdit.setText(json.getString("email"));
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else Toast.makeText(getContext(), "Network error", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(getContext(), "No document", Toast.LENGTH_SHORT).show();
@@ -93,6 +99,7 @@ public class EditProfile extends Fragment {
                                     Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
                                     Intent dashboard = new Intent(getActivity(),DashboardActivity.class);
                                     startActivity(dashboard);
+                                    getActivity().finish();
                                 }
                             }
                         });
