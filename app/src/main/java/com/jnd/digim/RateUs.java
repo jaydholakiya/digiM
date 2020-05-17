@@ -1,6 +1,10 @@
 package com.jnd.digim;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -17,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.UUID;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class RateUs extends Fragment {
 
@@ -79,14 +86,55 @@ public class RateUs extends Fragment {
                                 String complainId = Long.toString(complainid.getMostSignificantBits(),36) + Long.toString(complainid.getLeastSignificantBits(),36).replace("-","");
                                 Float starRate = rating.getRating();
                                 String starRating = starRate + " out of 5";
-                                databaseReference[0] = db.getReference("Complains").child(complaineeName+"_"+email.substring(0,email.indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                Rating ratings = new Rating(complaineeName,email,complain,complainTime,complainId,starRating);
-                                databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ratings);
-                                Toast.makeText(getContext(), "" + complaineeName+"\n"+email+"\n"+complain+"\n"+complainTime+"\n"+complainId+"\n"+starRating, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getContext(), "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
-                                complaint.setText("");
-                                if(bottomSheetDialog.isShowing()) {
-                                    bottomSheetDialog.dismiss();
+                                if(starRating.equals("0.0 out of 5")){
+                                    Toast.makeText(getContext(), "Please rate us out of 5", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    databaseReference[0] = db.getReference("Complains").child(complaineeName+"_"+email.substring(0,email.indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    Rating ratings = new Rating(complaineeName,email,complain,complainTime,complainId,starRating);
+                                    databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ratings);
+                                    Toast.makeText(getContext(), "" + complaineeName+"\n"+email+"\n"+complain+"\n"+complainTime+"\n"+complainId+"\n"+starRating, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+                                    complaint.setText("");
+                                    if(bottomSheetDialog.isShowing()) {
+                                        bottomSheetDialog.dismiss();
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                            String id = "id_product";
+                                            // The user-visible name of the channel.
+                                            CharSequence name = "Feedbacks";
+                                            // The user-visible description of the channel.
+                                            String description = "For feedback submitting";
+                                            NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+                                            // Configure the notification channel.
+                                            mChannel.setDescription(description);
+                                            mChannel.enableLights(true);
+                                            // Sets the notification light color for notifications posted to this
+                                            // channel, if the device supports this feature.
+                                            mChannel.setLightColor(Color.RED);
+                                            notificationManager.createNotificationChannel(mChannel);
+                                            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(),"id_product")
+                                                    .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
+                                                    .setChannelId(id)
+                                                    .setContentTitle("Promotion order")
+                                                    .setAutoCancel(true)
+                                                    .setNumber(2)
+                                                    .setColor(255)
+                                                    .setContentText("Your rated us with \"" + starRating + "\" with \"" + complain + "\" feedback")
+                                                    .setWhen(System.currentTimeMillis())
+                                                    .setDefaults(NotificationCompat.DEFAULT_ALL);
+                                            notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+                                        }
+                                        else{
+                                            NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                            Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
+                                                    .setContentText("Idea successfully submitted")
+                                                    .setSmallIcon(R.drawable.instagram_icon)
+                                                    .setAutoCancel(true)
+                                                    .build();
+                                            notificationManager.notify(0,notification);
+                                        }
+                                    }
                                 }
                             }
                         }

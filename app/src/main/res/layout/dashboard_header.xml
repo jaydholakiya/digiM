@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="username"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="2dp"
             android:gravity="center"
             android:textColor="@color/text"
             android:textSize="18sp"

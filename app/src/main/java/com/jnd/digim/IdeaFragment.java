@@ -4,7 +4,9 @@ import android.app.ActionBar;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -60,56 +62,6 @@ public class IdeaFragment extends Fragment {
 //            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-//                NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
-//                String id = "1";
-//                CharSequence name = "Jay";
-//                String description = "AAAAAAAAAAAAAAAAAAAAAAAA";
-//                int importance = NotificationManager.IMPORTANCE_LOW;
-//                NotificationChannel channel = new NotificationChannel(id,name,importance);
-//                channel.setDescription(description);
-//                channel.enableLights(true);
-//                channel.setLightColor(Color.RED);
-//                channel.enableVibration(true);
-//                channel.setVibrationPattern(new long[]{100,200,300,400,500,400,300,200,400});
-//                notificationManager.createNotificationChannel(channel);
-//                Notification notification = new Notification.Builder(getContext())
-//                        .setContentText("You clicked share Idea button")
-//                        .setContentTitle("Notification")
-//                        .setSmallIcon(R.mipmap.ic_launcher)
-//                        .setChannelId("My Channel 1")
-//                        .setOngoing(true)
-//                        .setDefaults(NotificationCompat.DEFAULT_ALL).build();
-//                notificationManager.notify(Integer.parseInt(id),notification);
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
-//                    String id = "id_product";
-//                    // The user-visible name of the channel.
-//                    CharSequence name = "Product";
-//                    // The user-visible description of the channel.
-//                    String description = "Notifications regarding our products";
-//                    int importance = NotificationManager.IMPORTANCE_LOW;
-//                    NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
-//                    // Configure the notification channel.
-//                    mChannel.setDescription(description);
-//                    mChannel.enableLights(true);
-//                    // Sets the notification light color for notifications posted to this
-//                    // channel, if the device supports this feature.
-//                    mChannel.setLightColor(Color.RED);
-//                    notificationManager.createNotificationChannel(mChannel);
-//                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(),"id_product")
-//                            .setSmallIcon(R.drawable.instagram_icon) //your app icon
-//                            .setChannelId(id)
-//                            .setContentTitle("Idea Sharing")
-//                            .setAutoCancel(true)
-//                            .setNumber(2)
-//                            .setColor(255)
-//                            .setContentText("Your idea submitted successfully")
-//                            .setWhen(System.currentTimeMillis())
-//                            .setDefaults(NotificationCompat.DEFAULT_ALL);
-//                    String A="0";
-//                    notificationManager.notify(Integer.parseInt(A), notificationBuilder.build());
-//                }
-
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheet);
                 final View bottomSheet = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_sheet_ideas,(ConstraintLayout)v.findViewById(R.id.bottomDialog));
                 bottomSheet.findViewById(R.id.postIdea).setOnClickListener(new View.OnClickListener() {
@@ -132,9 +84,44 @@ public class IdeaFragment extends Fragment {
                                 Idea ideas = new Idea(uniqueIdea,ideaId,senderName,timeStamp);
                                 databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ideas);
                                 idea.setText("");
-                                Toast.makeText(getContext(), "Idea submitted successfully", Toast.LENGTH_SHORT).show();
                                 if(bottomSheetDialog.isShowing()) {
                                     bottomSheetDialog.dismiss();
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                        String id = "id_product";
+                                        // The user-visible name of the channel.
+                                        CharSequence name = "Ideas";
+                                        // The user-visible description of the channel.
+                                        String description = "For Ideas submission";
+                                        NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+                                        // Configure the notification channel.
+                                        mChannel.setDescription(description);
+                                        mChannel.enableLights(true);
+                                        // Sets the notification light color for notifications posted to this
+                                        // channel, if the device supports this feature.
+                                        mChannel.setLightColor(Color.RED);
+                                        notificationManager.createNotificationChannel(mChannel);
+                                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(),"id_product")
+                                                .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
+                                                .setChannelId(id)
+                                                .setContentTitle("Idea Sharing")
+                                                .setAutoCancel(true)
+                                                .setNumber(2)
+                                                .setColor(255)
+                                                .setContentText("Idea " + uniqueIdea + " submitted successfully")
+                                                .setWhen(System.currentTimeMillis())
+                                                .setDefaults(NotificationCompat.DEFAULT_ALL);
+                                        notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+                                    }
+                                    else{
+                                        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                        Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
+                                                .setContentText("Idea successfully submitted")
+                                                .setSmallIcon(R.drawable.instagram_icon)
+                                                .setAutoCancel(true)
+                                                .build();
+                                        notificationManager.notify(0,notification);
+                                    }
                                 }
                             }
                         }

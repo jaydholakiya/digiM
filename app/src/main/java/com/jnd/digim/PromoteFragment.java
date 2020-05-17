@@ -1,12 +1,16 @@
 package com.jnd.digim;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,6 +51,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.os.Build.VERSION_CODES.O;
 import static java.lang.String.valueOf;
 
@@ -319,8 +325,8 @@ public class PromoteFragment extends Fragment {
                         RadioButton rTwitter = (RadioButton)v.findViewById(R.id.twitterRadio);
                         RadioButton rTikTok = (RadioButton)v.findViewById(R.id.tiktokRadio);
                         RadioButton rYoutube = (RadioButton)v.findViewById(R.id.youtubeRadio);
-                        String order = promotion[0];
-                        String orderType = selectedText.getText().toString();
+                        String order = selectedText.getText().toString();
+                        String orderType = promotion[0];
                         UUID uuid = UUID.randomUUID();
                         String orderId = Long.toString(uuid.getMostSignificantBits(),36) + Long.toString(uuid.getLeastSignificantBits(),36).replace("-","");
                         String email = user.getEmail();
@@ -340,11 +346,46 @@ public class PromoteFragment extends Fragment {
                                 databaseReference[0] = db.getReference("Orders");
                                 Order orders = new Order(order, orderType, orderId, email, orderDateTime, urlLink, transactionId, contactNo, timeStamp, orderReviewed);
                                 databaseReference[0].child(user.getDisplayName() + "_" + user.getEmail().substring(0, user.getEmail().indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid()).child(databaseReference[0].push().getKey()).setValue(orders);
-                                Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show();
                                 selectedText.setText("No promotions selected");
                                 url.setText("");
                                 transaction.setText("");
                                 mobileNo.setText("");
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                    String id = "id_product";
+                                    // The user-visible name of the channel.
+                                    CharSequence name = "Promotions";
+                                    // The user-visible description of the channel.
+                                    String description = "For order placing";
+                                    NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+                                    // Configure the notification channel.
+                                    mChannel.setDescription(description);
+                                    mChannel.enableLights(true);
+                                    // Sets the notification light color for notifications posted to this
+                                    // channel, if the device supports this feature.
+                                    mChannel.setLightColor(Color.RED);
+                                    notificationManager.createNotificationChannel(mChannel);
+                                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(),"id_product")
+                                            .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
+                                            .setChannelId(id)
+                                            .setContentTitle("Promotion order")
+                                            .setAutoCancel(true)
+                                            .setNumber(2)
+                                            .setColor(255)
+                                            .setContentText("Your order \"" + order + "\" for \"" + orderType + "\" successfully placed")
+                                            .setWhen(System.currentTimeMillis())
+                                            .setDefaults(NotificationCompat.DEFAULT_ALL);
+                                    notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+                                }
+                                else{
+                                    NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+                                    Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
+                                            .setContentText("Idea successfully submitted")
+                                            .setSmallIcon(R.drawable.instagram_icon)
+                                            .setAutoCancel(true)
+                                            .build();
+                                    notificationManager.notify(0,notification);
+                                }
                             }
                     }
                 }
