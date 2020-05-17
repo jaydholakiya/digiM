@@ -3,12 +3,18 @@ package com.jnd.digim;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -90,11 +96,81 @@ public class SigninActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if ( task.isSuccessful() ) {
-                            Toast.makeText(SigninActivity.this, "Check your inbox of '" + emailReplaced + "' for password reset link", Toast.LENGTH_SHORT).show();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                String id = "id_product";
+                                // The user-visible name of the channel.
+                                CharSequence name = "Password Reset";
+                                // The user-visible description of the channel.
+                                String description = "For Password reset";
+                                NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+                                // Configure the notification channel.
+                                mChannel.setDescription(description);
+                                mChannel.enableLights(true);
+                                // Sets the notification light color for notifications posted to this
+                                // channel, if the device supports this feature.
+                                mChannel.setLightColor(Color.RED);
+                                notificationManager.createNotificationChannel(mChannel);
+                                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(SigninActivity.this,"id_product")
+                                        .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
+                                        .setChannelId(id)
+                                        .setContentTitle("Password reset")
+                                        .setAutoCancel(true)
+                                        .setNumber(2)
+                                        .setColor(255)
+                                        .setContentText("Check your inbox of '" + emailReplaced + "' for password reset link")
+                                        .setWhen(System.currentTimeMillis())
+                                        .setDefaults(NotificationCompat.DEFAULT_ALL);
+                                notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+                            }
+                            else{
+                                NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                Notification notification = new Notification.Builder(getApplicationContext()).setContentTitle("Idea submission")
+                                        .setContentText("Check your inbox of '" + emailReplaced + "' for password reset link")
+                                        .setSmallIcon(R.drawable.instagram_icon)
+                                        .setAutoCancel(true)
+                                        .build();
+                                notificationManager.notify((int) System.currentTimeMillis(),notification);
+                            }
                             forgotPass.setEnabled(true);
                         }
                         else {
-                            Toast.makeText(SigninActivity.this, "It seems like the email you have entered is wrong", Toast.LENGTH_SHORT).show();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                String id = "id_product";
+                                // The user-visible name of the channel.
+                                CharSequence name = "Password reset";
+                                // The user-visible description of the channel.
+                                String description = "For Password reset";
+                                NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
+                                // Configure the notification channel.
+                                mChannel.setDescription(description);
+                                mChannel.enableLights(true);
+                                // Sets the notification light color for notifications posted to this
+                                // channel, if the device supports this feature.
+                                mChannel.setLightColor(Color.RED);
+                                notificationManager.createNotificationChannel(mChannel);
+                                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(SigninActivity.this,"id_product")
+                                        .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
+                                        .setChannelId(id)
+                                        .setContentTitle("Password reset")
+                                        .setAutoCancel(true)
+                                        .setNumber(2)
+                                        .setColor(255)
+                                        .setContentText("It seems like the email you have entered is wrong")
+                                        .setWhen(System.currentTimeMillis())
+                                        .setDefaults(NotificationCompat.DEFAULT_ALL);
+                                notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+                            }
+                            else{
+                                NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                Notification notification = new Notification.Builder(getApplicationContext()).setContentTitle("Idea submission")
+                                        .setContentText("It seems like the email you have entered is wrong")
+                                        .setSmallIcon(R.drawable.instagram_icon)
+                                        .setAutoCancel(true)
+                                        .build();
+                                notificationManager.notify((int) System.currentTimeMillis(),notification);
+                            }
                             forgotPass.setEnabled(true);
                         }
                     }
