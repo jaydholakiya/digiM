@@ -62,7 +62,26 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
         youTubePlayerFragment.getView().setVisibility(View.GONE);
 
         Context context = null;
-        MapView mapView = (MapView)view.findViewById(R.id.map);
+        MapView mapView = (MapView)view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.onResume();
+        try{
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap mMap) {
+                googleMap=mMap;
+                googleMap.setMyLocationEnabled(true);
+                LatLng latLng = new LatLng(19.169257,73.341601);
+//                googleMap.animateCamera(new MarkerOptions().position(latLng).title("Suyog Bunglows").snippet("It is a digital marketers company"));
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        });
         ImageView facebookIcon = (ImageView)view.findViewById(R.id.facebookIcon);
         facebookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,15 +135,15 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        MapsInitializer.initialize(getContext());
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(19.169257,73.341601)).title("Suyog Bunglows").snippet("Communication Address"));
-        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(19.169257,73.341601)).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Suyog));
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//
+//        MapsInitializer.initialize(getContext());
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        googleMap.addMarker(new MarkerOptions().position(new LatLng(19.169257,73.341601)).title("Suyog Bunglows").snippet("Communication Address"));
+//        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(19.169257,73.341601)).zoom(16).bearing(0).tilt(45).build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Suyog));
+//    }
 
 //    @Override
 //    public void onMapReady(GoogleMap googleMap) {
@@ -137,29 +156,33 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
 //        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(21.5222, 70.4579)));
 //    }
 //
-//    @Override
-//    public void onResume() {
-//        mapView.onResume();
-//        super.onResume();
-//    }
-//
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        mapView.onPause();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        mapView.onDestroy();
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//        super.onLowMemory();
-//        mapView.onLowMemory();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
 }

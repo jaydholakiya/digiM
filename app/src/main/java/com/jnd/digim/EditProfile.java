@@ -56,10 +56,7 @@ public class EditProfile extends Fragment {
         if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()==null){
             removePic.setVisibility(View.GONE);
         }
-//        NavigationView navigationView = (NavigationView)view.findViewById(R.id.nvView);
-//        View headerView = navigationView.getHeaderView(0);
-//        final TextView username = (TextView)headerView.findViewById(R.id.username);
-//        final EditText emailEdit = (EditText)view.findViewById(R.id.emailEdit);
+
         Button submitProfile = (Button)view.findViewById(R.id.submitProfile);
 
         ImageView profilePicture = (ImageView)view.findViewById(R.id.profilePicture);
