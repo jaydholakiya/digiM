@@ -128,7 +128,7 @@ public class RateUs extends Fragment {
                                         else{
                                             NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                             Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
-                                                    .setContentText("Idea successfully submitted")
+                                                    .setContentText("Your rated us with \"" + starRating + "\" with \"" + complain + "\" feedback")
                                                     .setSmallIcon(R.drawable.instagram_icon)
                                                     .setAutoCancel(true)
                                                     .build();
