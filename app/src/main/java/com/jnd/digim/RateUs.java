@@ -93,9 +93,10 @@ public class RateUs extends Fragment {
                                     databaseReference[0] = db.getReference("Complains").child(complaineeName+"_"+email.substring(0,email.indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid());
                                     Rating ratings = new Rating(complaineeName,email,complain,complainTime,complainId,starRating);
                                     databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ratings);
-                                    Toast.makeText(getContext(), "" + complaineeName+"\n"+email+"\n"+complain+"\n"+complainTime+"\n"+complainId+"\n"+starRating, Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(getContext(), "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
                                     complaint.setText("");
+                                    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                                        Toast.makeText(getContext(), "You rated us with " + starRating, Toast.LENGTH_SHORT).show();
+                                    }
                                     if(bottomSheetDialog.isShowing()) {
                                         bottomSheetDialog.dismiss();
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

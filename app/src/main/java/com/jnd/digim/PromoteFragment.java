@@ -350,6 +350,9 @@ public class PromoteFragment extends Fragment {
                                 url.setText("");
                                 transaction.setText("");
                                 mobileNo.setText("");
+                                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                                    Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show();
+                                }
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                     String id = "id_product";

@@ -84,6 +84,9 @@ public class IdeaFragment extends Fragment {
                                 Idea ideas = new Idea(uniqueIdea,ideaId,senderName,timeStamp);
                                 databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ideas);
                                 idea.setText("");
+                                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                                    Toast.makeText(getContext(), "Idea shared successfully", Toast.LENGTH_SHORT).show();
+                                }
                                 if(bottomSheetDialog.isShowing()) {
                                     bottomSheetDialog.dismiss();
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
