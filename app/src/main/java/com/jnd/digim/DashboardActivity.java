@@ -74,8 +74,7 @@ public class DashboardActivity extends AppCompatActivity {
                 .into(profilePic);
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-            }
+            public void onClick(View v) {}
         });
 
         TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderDashboard);
