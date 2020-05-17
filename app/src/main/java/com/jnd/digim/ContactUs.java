@@ -1,5 +1,6 @@
 package com.jnd.digim;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -25,6 +28,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.synnapps.carouselview.CarouselView;
 
 import java.io.File;
 
@@ -47,6 +52,15 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_us,container,false);
+
+        CarouselView carouselView;
+        carouselView = getActivity().findViewById(R.id.carouselView);
+        carouselView.setVisibility(View.GONE);
+
+        YouTubePlayerFragment youTubePlayerFragment =
+                (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
+        youTubePlayerFragment.getView().setVisibility(View.GONE);
+
         Context context = null;
         MapView mapView = (MapView)view.findViewById(R.id.map);
         ImageView facebookIcon = (ImageView)view.findViewById(R.id.facebookIcon);
@@ -104,6 +118,7 @@ public class ContactUs extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         MapsInitializer.initialize(getContext());
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.addMarker(new MarkerOptions().position(new LatLng(19.169257,73.341601)).title("Suyog Bunglows").snippet("Communication Address"));

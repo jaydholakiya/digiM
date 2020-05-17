@@ -55,7 +55,7 @@ public class EditProfile extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if ( task.isSuccessful() ) {
                     try {
-                        JSONObject json = new JSONObject(task.getResult().getData().toString());
+                        JSONObject json = new JSONObject(task.getResult().getData());
                         firstNameEdit.setText(json.getString("firstname"));
                         lastNameEdit.setText(json.getString("lastname"));
 //                        emailEdit.setText(json.getString("email"));

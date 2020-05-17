@@ -15,9 +15,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +59,16 @@ public class DashboardActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView)findViewById(R.id.nvView);
         View headerView = navigationView.getHeaderView(0);
         TextView username = (TextView)headerView.findViewById(R.id.username);
+        ImageView profilePic = (ImageView)headerView.findViewById(R.id.profilePic);
+        Glide.with(this)
+                .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                .into(profilePic);
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderDashboard);
         digiMLogoDashboard.setOnClickListener(new View.OnClickListener() {

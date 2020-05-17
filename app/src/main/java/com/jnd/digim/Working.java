@@ -11,12 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.synnapps.carouselview.CarouselView;
+
 public class Working extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.working,container,false);
         Button viewPDF = (Button)view.findViewById(R.id.download);
+        CarouselView carouselView;
+        carouselView = getActivity().findViewById(R.id.carouselView);
+        carouselView.setVisibility(View.GONE);
+
+        YouTubePlayerFragment youTubePlayerFragment =
+                (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
+        youTubePlayerFragment.getView().setVisibility(View.GONE);
         viewPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

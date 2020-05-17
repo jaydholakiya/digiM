@@ -9,10 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.synnapps.carouselview.CarouselView;
+
 public class AboutUs extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        CarouselView carouselView;
+        carouselView = getActivity().findViewById(R.id.carouselView);
+        carouselView.setVisibility(View.GONE);
+
+        YouTubePlayerFragment youTubePlayerFragment =
+                (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
+        youTubePlayerFragment.getView().setVisibility(View.GONE);
         return inflater.inflate(R.layout.about_us,container,false);
     }
 }

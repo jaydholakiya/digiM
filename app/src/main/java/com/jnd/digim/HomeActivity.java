@@ -115,7 +115,6 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
 
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youTube);
-
         youTubePlayerFragment.initialize(YouTubeConfig.getApiKey(),this);
     }
 
