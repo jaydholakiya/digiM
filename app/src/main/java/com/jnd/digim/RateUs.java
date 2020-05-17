@@ -132,7 +132,7 @@ public class RateUs extends Fragment {
                                                     .setSmallIcon(R.drawable.instagram_icon)
                                                     .setAutoCancel(true)
                                                     .build();
-                                            notificationManager.notify(0,notification);
+                                            notificationManager.notify((int) System.currentTimeMillis(),notification);
                                         }
                                     }
                                 }
