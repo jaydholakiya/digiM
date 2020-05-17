@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,15 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,12 +32,15 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.app.Activity.RESULT_OK;
 
 public class EditProfile extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -42,13 +50,37 @@ public class EditProfile extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_profile,container,false);
+        ImageButton removePic = (ImageButton)view.findViewById(R.id.removePic);
         final EditText firstNameEdit = (EditText)view.findViewById(R.id.firstNameEdit);
         final EditText lastNameEdit = (EditText)view.findViewById(R.id.lastNameEdit);
+        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl()==null){
+            removePic.setVisibility(View.GONE);
+        }
 //        NavigationView navigationView = (NavigationView)view.findViewById(R.id.nvView);
 //        View headerView = navigationView.getHeaderView(0);
 //        final TextView username = (TextView)headerView.findViewById(R.id.username);
 //        final EditText emailEdit = (EditText)view.findViewById(R.id.emailEdit);
         Button submitProfile = (Button)view.findViewById(R.id.submitProfile);
+
+        ImageView profilePicture = (ImageView)view.findViewById(R.id.profilePicture);
+        profilePicture.setImageURI(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
+
+        removePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(null).build();
+                FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(getActivity(),DashboardActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    }
+                });
+            }
+        });
 
         db.collection("Users").document(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,44 +11,53 @@
     android:focusableInTouchMode="true">
 
     <!--Logohover : #af9999-->
+
     <TextView
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/righteous"
         android:text="Edit profile"
         android:textColor="#ffffff"
         android:textSize="40sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-    <EditText
-        android:id="@+id/firstNameEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit"
-        android:drawableRight="@drawable/ic_verified_user_black_24dp"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        android:hint="First name"
-        android:layout_marginTop="40dp"
-        android:textColor="#ffffff"
-        android:inputType="textFilter"
-        android:textColorHint="#ffffff"
-        android:textSize="20sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/lastNameEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_verified_user_black_24dp"
-        android:hint="Last name"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardForProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/firstNameEdit"
-        android:textColor="#ffffff"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        android:inputType="textFilter"
-        android:textColorHint="#ffffff"
-        android:textSize="20sp" />
-<!--    <EditText-->
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit">
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:layout_editor_absoluteX="156dp"
+            tools:layout_editor_absoluteY="373dp" />
+        <ImageButton
+            android:id="@+id/removePic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_close_black_24dp">
+        </ImageButton>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--    <EditText-->
 <!--        android:id="@+id/emailEdit"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
@@ -61,15 +70,55 @@
 <!--        android:textColorHint="#ffffff"-->
 <!--        android:textSize="20sp" />-->
 
+    <EditText
+        android:id="@+id/firstNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit"
+        android:layout_marginTop="20dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        android:drawableRight="@drawable/ic_verified_user_black_24dp"
+        android:hint="First name"
+        android:inputType="textFilter"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/cardForProfile"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/cardForProfile"
+        app:layout_constraintTop_toBottomOf="@+id/cardForProfile" />
+
+    <EditText
+        android:id="@+id/lastNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameEdit"
+        android:layout_marginTop="20dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        android:drawableRight="@drawable/ic_verified_user_black_24dp"
+        android:hint="Last name"
+        android:inputType="textFilter"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameEdit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstNameEdit"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEdit" />
+
     <Button
         android:id="@+id/submitProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:textColor="#FFFFFF"
         android:layout_below="@+id/lastNameEdit"
-        android:layout_marginTop="40dp"
         android:background="@drawable/button"
-        android:textAllCaps="false"/>
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEdit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lastNameEdit"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameEdit" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
