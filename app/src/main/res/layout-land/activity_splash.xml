@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     android:focusableInTouchMode="true"
     tools:context=".SplashActivity">
 
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:text="digiM"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="55sp"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp" />
@@ -31,6 +31,6 @@
         android:fontFamily="@font/righteous"
         android:gravity="center"
         android:text="Your victory, our success..."
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 </RelativeLayout>

@@ -1,39 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:background="@color/colorAccent">
+    android:background="@color/whiteBackground">
+
+    <TextView
+        android:id="@+id/promotions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select promotions :"
+        android:textColor="@color/textColor"
+        android:textSize="15sp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/socialRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/promotions">
+
+        <RadioButton
+            android:id="@+id/instagramRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instagram"
+            android:textColor="@color/textColor" />
+
+        <RadioButton
+            android:id="@+id/youtubeRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:text="Youtube" />
+
+        <RadioButton
+            android:id="@+id/facebookRadio"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Facebook" />
+
+        <RadioButton
+            android:id="@+id/twitterRadio"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Twitter" />
+
+        <RadioButton
+            android:id="@+id/tiktokRadio"
+            android:layout_width="match_parent"
+            android:textColor="@color/textColor"
+            android:layout_height="wrap_content"
+            android:text="TikTok" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/promotionData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No promotion selected"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/urlLink"
+        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
+        app:layout_constraintStart_toStartOf="@+id/socialRadio"
+        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
 
     <EditText
         android:id="@+id/urlLink"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:hint="Paste your social media URL..."
         android:inputType="textMultiLine"
-        android:layout_below="@+id/selected"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/socialRadio"
+        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/transactionId"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:hint="Transaction Id"
+        android:layout_marginTop="25dp"
+        android:inputType="text"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/urlLink"
+        app:layout_constraintStart_toStartOf="@+id/urlLink"
+        app:layout_constraintTop_toBottomOf="@+id/urlLink" />
+
+    <EditText
+        android:id="@+id/mobileNo"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
         android:hint="Mobile No."
-        android:layout_below="@+id/urlLink"
-        android:layout_marginTop="15dp"
-        android:maxLength="10"
         android:inputType="number"
-        android:layout_centerHorizontal="true"/>
+        android:maxLength="10"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/transactionId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/transactionId"
+        app:layout_constraintTop_toBottomOf="@+id/transactionId" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/placeOrder"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:text="Place Order"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button"
+        app:layout_constraintEnd_toEndOf="@+id/mobileNo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/mobileNo"
+        app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

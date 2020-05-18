@@ -10,23 +10,23 @@
         android:id="@+id/developers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/righteous"
         android:text="Developer :"
         android:textColor="@color/textColor"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/jay"
+        app:layout_constraintStart_toStartOf="@+id/jay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardForDeveloper"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
         app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/jay"
+        app:layout_constraintEnd_toEndOf="@+id/developers"
+        app:layout_constraintStart_toStartOf="@+id/developers"
         app:layout_constraintTop_toBottomOf="@+id/developers">
 
         <ImageView
@@ -42,37 +42,37 @@
         android:id="@+id/jay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
         android:fontFamily="@font/righteous"
         android:text="Jay Dholakiya"
         android:textColor="@color/textColor"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardForDeveloper" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/yash"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/concept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/righteous"
         android:text="Concept by :"
         android:textColor="@color/textColor"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jay" />
+        app:layout_constraintEnd_toEndOf="@+id/yash"
+        app:layout_constraintStart_toStartOf="@+id/yash"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardForConcept"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
         app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/yash"
+        app:layout_constraintEnd_toEndOf="@+id/concept"
+        app:layout_constraintStart_toStartOf="@+id/concept"
         app:layout_constraintTop_toBottomOf="@+id/concept">
 
         <ImageView
@@ -89,15 +89,13 @@
         android:id="@+id/yash"
         android:layout_width="115dp"
         android:layout_height="37dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
         android:fontFamily="@font/righteous"
         android:text="Yash Vyas"
         android:textColor="@color/textColor"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardForConcept" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="518dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

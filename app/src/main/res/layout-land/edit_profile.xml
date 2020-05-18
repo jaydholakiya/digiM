@@ -14,11 +14,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardForProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="35dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginRight="22dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:background="#00000000"
             android:src="@drawable/ic_close_black_24dp"></ImageButton>
@@ -58,7 +58,7 @@
 
     <EditText
         android:id="@+id/firstNameEdit"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit"
         android:layout_marginTop="20dp"
@@ -76,13 +76,13 @@
 
     <EditText
         android:id="@+id/lastNameEdit"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstNameEdit"
         android:layout_marginTop="20dp"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
         android:drawableRight="@drawable/ic_verified_user_black_24dp"
-        android:hint="Last name"
+        android:hint="Sur name"
         android:inputType="textFilter"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -94,7 +94,7 @@
 
     <Button
         android:id="@+id/submitProfile"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lastNameEdit"
         android:background="@drawable/button"

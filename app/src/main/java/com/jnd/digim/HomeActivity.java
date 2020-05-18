@@ -131,7 +131,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             findViewById(R.id.login).setVisibility(View.VISIBLE);
             ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.myDashboard).setVisible(false);
         }
-        else findViewById(R.id.login).setVisibility(View.INVISIBLE);
+        else findViewById(R.id.login).setVisibility(View.GONE);
     }
 
     ImageListener imageListener = new ImageListener() {

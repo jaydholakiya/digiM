@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginLayout"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteBackground"
     android:padding="8dp"
     android:orientation="vertical"
     tools:context=".SignupActivity">
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:text="digiM"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:layout_centerHorizontal="true"
         android:textSize="40sp"/>
 
@@ -40,8 +40,8 @@
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
             android:hint="Name"
             android:inputType="textFilter"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             android:textSize="20sp" />
 
         <EditText
@@ -54,8 +54,8 @@
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
             android:hint="Surname"
             android:inputType="textFilter"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             android:textSize="20sp" />
     </LinearLayout>
     <EditText
@@ -68,8 +68,8 @@
         android:drawableRight="@drawable/ic_email_black_24dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="#ffffff"
-        android:textColor="#ffffff"
+        android:textColorHint="@color/textColor"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 
     <EditText
@@ -82,8 +82,8 @@
         android:drawableRight="@drawable/ic_vpn_key_black_24dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#ffffff"
-        android:textColor="#ffffff"
+        android:textColorHint="@color/textColor"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 
     <Button
@@ -108,6 +108,6 @@
         android:layout_centerHorizontal="true"
         android:text="Existing User? Sign in"
         android:onClick="openLogin"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 </RelativeLayout>
