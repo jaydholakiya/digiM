@@ -46,11 +46,10 @@
         android:id="@+id/postIdea"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="68dp"
         android:background="@drawable/button"
         android:src="@drawable/ic_check_black_24dp"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/shareIdeaTxt"
+        app:layout_constraintBottom_toTopOf="@+id/shareIdeaTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
