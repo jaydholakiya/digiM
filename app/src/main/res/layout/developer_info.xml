@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/whiteBackground"
     android:layout_height="match_parent">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_marginTop="84dp"
         android:fontFamily="@font/righteous"
         android:text="Developer :"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +46,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/righteous"
         android:text="Jay Dholakiya"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -59,7 +60,7 @@
         android:layout_marginTop="104dp"
         android:fontFamily="@font/righteous"
         android:text="Concept by :"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/righteous"
         android:text="Yash Vyas"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text"
+    android:background="@color/whiteBackground"
     tools:context=".DashboardActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -43,10 +43,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/darkOrange"
+        android:background="@color/colorAccent"
         android:textAlignment="center"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/text"
+        app:itemIconTint="@color/common_google_signin_btn_text_dark"
+        app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/menu" />
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteBackground"
     tools:context=".HomeActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -32,7 +32,7 @@
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"
                     android:layout_marginTop="80dp"
-                    app:fillColor="@color/colorPrimary"
+                    app:fillColor="@color/whiteBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:radius="6dp"

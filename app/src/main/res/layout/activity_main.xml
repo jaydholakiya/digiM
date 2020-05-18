@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginLayout"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteBackground"
     android:padding="30dp"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:text="digiM"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="55sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
@@ -29,11 +29,11 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_email_black_24dp"
         android:hint="Email"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:layout_below="@id/digimLogoLogin"
         android:layout_marginTop="40dp"
         android:inputType="textEmailAddress"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
 
     <EditText
@@ -42,11 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailLogin"
         android:layout_marginTop="20dp"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:drawableRight="@drawable/ic_vpn_key_black_24dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
 
     <Button
@@ -66,7 +66,7 @@
         android:id="@+id/forgotPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="20sp"
         android:text="Forgot Password?"
         android:onClick="forgotPassword"
@@ -82,6 +82,6 @@
         android:paddingTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="@string/no_account"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 </RelativeLayout>

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/whiteBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +13,7 @@
         android:layout_marginTop="96dp"
         android:fontFamily="@font/righteous"
         android:text="Working"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/workingTxt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:fontFamily="@font/righteous"
         android:gravity="center"
         android:text="@string/working"
-        android:textColor="@color/text"
+        android:textColor="@color/textColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/howitworks"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
         android:text="View PDF"
+        android:background="@color/iconColors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workingTxt" />

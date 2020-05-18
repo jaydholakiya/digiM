@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginLayout"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteBackground"
     android:padding="30dp"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:text="digiM"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="55sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
@@ -31,9 +31,9 @@
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
         android:hint="First name"
         android:layout_marginTop="40dp"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:inputType="textFilter"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
 
     <EditText
@@ -44,10 +44,10 @@
         android:hint="Last name"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/firstName"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
         android:inputType="textFilter"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
     <EditText
         android:id="@+id/emailSignup"
@@ -55,11 +55,11 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/ic_email_black_24dp"
         android:hint="Email"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:layout_below="@id/lastName"
         android:layout_marginTop="20dp"
         android:inputType="textEmailAddress"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
 
     <EditText
@@ -67,12 +67,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/emailSignup"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:layout_marginTop="20dp"
         android:drawableRight="@drawable/ic_vpn_key_black_24dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#ffffff"
+        android:textColorHint="@color/textColor"
         android:textSize="20sp" />
 
     <Button
@@ -95,6 +95,6 @@
         android:paddingTop="40dp"
         android:layout_centerHorizontal="true"
         android:text="Existing User? Sign in"
-        android:textColor="#ffffff"
+        android:textColor="@color/textColor"
         android:textSize="20sp" />
 </RelativeLayout>

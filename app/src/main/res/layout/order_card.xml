@@ -9,14 +9,14 @@
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
     app:cardElevation="10dp"
-    android:outlineAmbientShadowColor="@color/text"
+    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="20dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/grey">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/orderTypeTxt"
@@ -25,7 +25,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
         <TextView
@@ -85,7 +85,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
-            android:textColor="@color/text"
+            android:textColor="@color/textColor"
             android:textSize="16sp"/>
 
     </LinearLayout>

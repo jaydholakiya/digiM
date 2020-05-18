@@ -54,6 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.homeMain).setVisible(false);
         }
+
         else{
             findViewById(R.id.login).setVisibility(View.INVISIBLE);
         }
