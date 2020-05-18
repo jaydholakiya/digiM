@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/digimLogo"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/righteous"
         android:gravity="center"
         android:text="Your victory, our success..."

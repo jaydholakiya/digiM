@@ -57,6 +57,7 @@
             android:layout_gravity="center_vertical"
             android:text="username"
             android:layout_marginLeft="2dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:gravity="center"
             android:textColor="@color/textColor"
             android:textSize="18sp"
