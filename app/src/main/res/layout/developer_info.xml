@@ -10,7 +10,7 @@
         android:id="@+id/developers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/righteous"
         android:text="Developer :"
         android:textColor="@color/textColor"

@@ -11,11 +11,10 @@
         android:id="@+id/recyclerIdea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="70dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="70dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shareIdea"
@@ -23,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="@color/iconColors"
         android:clickable="true"
         android:focusable="true"

@@ -79,12 +79,7 @@ public class OrdersFragment extends Fragment {
         }
         public void setOrderId(String orderId){
             TextView ordersId = (TextView)view.findViewById(R.id.orderIdTxt);
-            if( orderId.length() < 30 ) {
-                ordersId.setText("Order id                -      " + orderId);
-            }
-            else{
-                ordersId.setText("Order id                -\n                        " + orderId);
-            }
+            ordersId.setText("Order id                -      " + orderId);
         }
         public void setTransactionId(String transactionId){
             TextView ordersTransaction = (TextView)view.findViewById(R.id.transactionIdTxt);

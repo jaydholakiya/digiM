@@ -51,6 +51,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         bottomNavigationView = findViewById(R.id.bottomNav);
+        getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.homeMain).setVisible(false);
         }
@@ -182,15 +183,12 @@ public class DashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.editProfile:
                 fragmentClass = EditProfile.class;
-                bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.changePass:
                 fragmentClass = ChangePassword.class;
-                bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
             case R.id.rateUs:
                 fragmentClass = RateUs.class;
-                bottomNavigationView.setVisibility(View.INVISIBLE);
                 break;
         }
 
@@ -214,9 +212,9 @@ public class DashboardActivity extends AppCompatActivity {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
         else{
-            if(getTitle().equals("Edit Profile") || getTitle().equals("Change Password") || getTitle().equals("Rate Us")){
-                Intent i = new Intent(DashboardActivity.this,DashboardActivity.class);
-                startActivity(i);
+            if( getTitle().equals("Edit Profile") || getTitle().equals("Change Password") || getTitle().equals("Rate Us") || getSupportActionBar().getTitle().equals("Edit Profile") || getSupportActionBar().getTitle().equals("Change Password") || getSupportActionBar().getTitle().equals("Rate Us") ){
+                Intent dashboardIntent = new Intent(DashboardActivity.this,DashboardActivity.class);
+                startActivity(dashboardIntent);
                 finish();
             }
             else{

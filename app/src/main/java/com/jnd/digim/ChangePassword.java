@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,18 +27,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePassword extends Fragment {
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.change_password,container,false);
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)getActivity().findViewById(R.id.bottomNav);
+        bottomNavigationView.setVisibility(View.GONE);
         final EditText pass = (EditText) view.findViewById(R.id.pass);
         Button change = (Button)view.findViewById(R.id.change);
-//        BottomNavigationView bottomNav = view.findViewById(R.id.bottomNav);
-//        bottomNav.setVisibility(View.GONE);
-//        view.findViewById(R.id.login).setVisibility(View.GONE);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Change Password");
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

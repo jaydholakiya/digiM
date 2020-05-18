@@ -6,21 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/howitworks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:fontFamily="@font/righteous"
-        android:text="Working"
-        android:textColor="@color/textColor"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/workingTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/workingTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,10 +15,7 @@
         android:text="@string/working"
         android:textColor="@color/textColor"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/howitworks"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/howitworks" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/download"

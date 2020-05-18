@@ -1,5 +1,6 @@
 package com.jnd.digim;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,12 +20,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +47,7 @@ import java.util.Map;
 import static android.app.Activity.RESULT_OK;
 
 public class EditProfile extends Fragment {
+    private Toolbar toolbar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Map<String, Object> Users = new HashMap<>();
 
@@ -50,6 +55,11 @@ public class EditProfile extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_profile,container,false);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)getActivity().findViewById(R.id.bottomNav);
+        bottomNavigationView.setVisibility(View.GONE);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Edit Profile");
+
         ImageButton removePic = (ImageButton)view.findViewById(R.id.removePic);
         final EditText firstNameEdit = (EditText)view.findViewById(R.id.firstNameEdit);
         final EditText lastNameEdit = (EditText)view.findViewById(R.id.lastNameEdit);
@@ -70,7 +80,7 @@ public class EditProfile extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(getActivity(),DashboardActivity.class);
+                            Intent intent = new Intent(getActivity().getApplicationContext(),DashboardActivity.class);
                             startActivity(intent);
                             getActivity().finish();
                         }

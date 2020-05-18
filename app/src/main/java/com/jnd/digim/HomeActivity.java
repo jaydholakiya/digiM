@@ -4,6 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         setTitle("digiM");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
