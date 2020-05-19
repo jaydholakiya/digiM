@@ -25,6 +25,19 @@
             android:layout_marginTop="79dp"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:animateLayoutChanges="true"
+                android:background="@color/colorAccent"
+                android:clickable="true"
+                app:itemIconSize="24dp"
+                app:itemIconTint="@color/common_google_signin_btn_text_dark"
+                app:itemRippleColor="#CDDC39"
+                app:itemTextColor="@color/colorPrimaryDark"
+                app:menu="@menu/menu" />
         </FrameLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -37,17 +50,5 @@
             app:menu="@menu/dashboard_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
-        android:textAlignment="center"
-        app:itemIconTint="@color/common_google_signin_btn_text_dark"
-        app:itemRippleColor="#CDDC39"
-        app:itemTextColor="@color/colorPrimaryDark"
-        app:menu="@menu/menu" />
 
 </RelativeLayout>

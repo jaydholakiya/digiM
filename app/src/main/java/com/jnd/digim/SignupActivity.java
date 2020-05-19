@@ -40,6 +40,7 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private Button signUpBtn;
     Map<String, Object> Users = new HashMap<>();
 
     @Override
@@ -54,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
         EditText lastName = findViewById(R.id.lastName);
         EditText emailSignup = findViewById(R.id.emailSignup);
         EditText passwordSignup = findViewById(R.id.passwordSignup);
-        Button signUpBtn = findViewById(R.id.signUpBtn);
+        signUpBtn = findViewById(R.id.signUpBtn);
         TextView alreadyAccount = findViewById(R.id.alreadyAccount);
         myLayout.clearFocus();
         Animation myAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
@@ -139,7 +140,6 @@ public class SignupActivity extends AppCompatActivity {
                         if ( task.isSuccessful() ) {
                             storeData();
                             Toast.makeText(SignupActivity.this, "Sign up with : " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-                            View view = null;
                             Intent i = new Intent(SignupActivity.this, SigninActivity.class);
                             i.putExtra("Email",email);
                             progressBar.setVisibility(View.GONE);

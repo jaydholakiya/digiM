@@ -97,10 +97,10 @@
         android:layout_centerHorizontal="true"
         android:text="Sign Up"
         android:textColor="#FFFFFF"
+        android:onClick="signUp"
         android:background="@drawable/button"
         android:layout_below="@+id/passwordSignup"
         android:layout_marginTop="20dp"
-        android:onClick="signUp"
         android:textAllCaps="false"/>
 
     <TextView
@@ -111,7 +111,6 @@
         android:paddingTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="Existing User? Sign in"
-        android:onClick="openLogin"
         android:textColor="@color/textColor"
         android:textSize="20sp" />
     <ProgressBar
