@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:layout_marginTop="88dp"
+        android:imeOptions="flagNoExtractUi"
         android:ems="10"
         android:hint="Share your creative ideas here..."
         android:inputType="textMultiLine"

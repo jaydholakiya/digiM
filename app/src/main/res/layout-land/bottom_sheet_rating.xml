@@ -47,6 +47,7 @@
         android:gravity="start|top"
         android:hint="Write your complaints here..."
         android:inputType="textMultiLine"
+        android:imeOptions="flagNoExtractUi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

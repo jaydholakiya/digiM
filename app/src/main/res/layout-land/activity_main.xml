@@ -18,6 +18,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:text="digiM"
+        android:layout_marginTop="25dp"
+        android:imeOptions="flagNoExtractUi"
         android:textColor="@color/textColor"
         android:layout_centerHorizontal="true"
         android:textSize="40sp"/>
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/digimLogoLogin"
         android:layout_marginTop="20dp"
+        android:imeOptions="flagNoExtractUi"
         android:layout_centerHorizontal="true"
         android:drawableRight="@drawable/ic_email_black_24dp"
         android:hint="Email"

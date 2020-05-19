@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -113,6 +114,7 @@ public class SignupActivity extends AppCompatActivity {
 }
 
     public void signUp(View coordinatorLayout) {
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBarSignUp);
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
         EditText firstName = findViewById(R.id.firstName);
@@ -122,10 +124,11 @@ public class SignupActivity extends AppCompatActivity {
         String fname = firstName.getText().toString();
         String lname = lastName.getText().toString();
         final String email = emailSignup.getText().toString();
-        String password = passwordSignup.getText().toString();
+        final String password = passwordSignup.getText().toString();
         ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
         if( activeNetwork != null && activeNetwork.isConnected() ) {
+            progressBar.setVisibility(View.VISIBLE);
             if( firstName.length() == 0 || lastName.length() == 0 || emailSignup.length() == 0 || passwordSignup.length() == 0 ) {
                 Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
             }
@@ -139,10 +142,12 @@ public class SignupActivity extends AppCompatActivity {
                             View view = null;
                             Intent i = new Intent(SignupActivity.this, SigninActivity.class);
                             i.putExtra("Email",email);
+                            progressBar.setVisibility(View.GONE);
                             startActivity(i);
                             finish();
                         }
                         else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(SignupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();
                         }
                     }
