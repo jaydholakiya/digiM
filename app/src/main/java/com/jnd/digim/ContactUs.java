@@ -18,13 +18,17 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+//import androidx.fragment.app.Fragment;
+import com.google.android.gms.maps.MapFragment;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -33,9 +37,9 @@ import com.synnapps.carouselview.CarouselView;
 
 import java.io.File;
 
-public class ContactUs extends Fragment {
-
-//    GoogleMap googleMap;
+public class ContactUs extends Fragment implements OnMapReadyCallback
+{
+    //    GoogleMap googleMap;
 //    MapView mapView;
 //
 //    @Override
@@ -52,7 +56,6 @@ public class ContactUs extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contact_us,container,false);
-
         CarouselView carouselView;
         carouselView = getActivity().findViewById(R.id.carouselView);
         carouselView.setVisibility(View.GONE);
@@ -133,6 +136,20 @@ public class ContactUs extends Fragment {
 //        mapView.onCreate(savedInstanceState);
 //        mapView.getMapAsync(this);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng marker = new LatLng(23.007927,72.507171);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,13));
+        googleMap.addMarker(new MarkerOptions().title("Suyog Bunglows").position(marker));
     }
 
 //    @Override
