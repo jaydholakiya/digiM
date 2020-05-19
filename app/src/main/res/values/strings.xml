@@ -23,4 +23,6 @@
 TikTok etc. You can do the promotion or a kind of marketing with this site. And it also works like you can send a request and use our different services and can promote your social media accounts.
     </string>
     <string name="google_maps_key">AIzaSyBZhPOEdOpG8jZDDOZKORT7g-WI9EfLaPc</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
