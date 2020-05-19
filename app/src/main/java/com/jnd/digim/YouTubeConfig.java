@@ -1,5 +1,6 @@
 package com.jnd.digim;
 
+//YouTube API Key for Video
 public class YouTubeConfig {
     public static String getApiKey() {
         return API_KEY;

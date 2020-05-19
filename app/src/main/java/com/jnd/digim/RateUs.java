@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -47,13 +45,15 @@ import java.util.UUID;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class RateUs extends Fragment {
-    private Toolbar toolbar;
+
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //Initializing the view
         View view = inflater.inflate(R.layout.rate_us,container,false);
         final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
         final TextView noRating = (TextView)view.findViewById(R.id.textRating);
@@ -113,9 +113,11 @@ public class RateUs extends Fragment {
                                 String complainId = Long.toString(complainid.getMostSignificantBits(),36) + Long.toString(complainid.getLeastSignificantBits(),36).replace("-","");
                                 Float starRate = rating.getRating();
                                 String starRating = starRate + " out of 5";
+
                                 if(starRating.equals("0.0 out of 5")){
                                     Toast.makeText(getContext(), "Please rate us out of 5", Toast.LENGTH_SHORT).show();
                                 }
+
                                 else{
                                     databaseReference[0] = db.getReference("Complains").child(complaineeName+"_"+email.substring(0,email.indexOf("."))+"_"+FirebaseAuth.getInstance().getCurrentUser().getUid());
                                     Rating ratings = new Rating(complaineeName,email,complain,complainTime,complainId,starRating);
@@ -126,6 +128,8 @@ public class RateUs extends Fragment {
                                     }
                                     if(bottomSheetDialog.isShowing()) {
                                         bottomSheetDialog.dismiss();
+
+                                        //Notifications for promote with Filtering OREO devices
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                             NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                             String id = "id_product";
@@ -180,6 +184,8 @@ public class RateUs extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        //Fetching feedbacks(Rating)
         FirebaseRecyclerAdapter<RatingGet,RatingViewHolder>FirebaserecyclerAdapter = new FirebaseRecyclerAdapter<RatingGet, RatingViewHolder>
                 (RatingGet.class,R.layout.recycler_rating,RatingViewHolder.class,mDatabase) {
             @Override

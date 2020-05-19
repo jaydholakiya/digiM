@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,10 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static android.graphics.Color.GREEN;
-import static android.graphics.Color.RED;
-
 public class OrdersFragment extends Fragment {
+
+    //Recycler view for Idea Getting
 
     private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
@@ -38,10 +36,16 @@ public class OrdersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //Initialized the view for Order Getting
         View view = inflater.inflate(R.layout.order_fragment,container,false);
+
+        //Showing the progress
         final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
         final TextView noOrdersTxt = (TextView)view.findViewById(R.id.textOrders);
         progressBarDashboard.setVisibility(View.VISIBLE);
+
+        //For showing "No orders"
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,6 +59,8 @@ public class OrdersFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+
+        //Path for database
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Orders").child(firebaseUser.getDisplayName()+"_"+firebaseUser.getEmail().substring(0,firebaseUser.getEmail().indexOf("."))+"_"+firebaseUser.getUid());
         databaseReference.keepSynced(true);
@@ -68,6 +74,9 @@ public class OrdersFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        //Populating the viewHolder for Orders getting
+
         FirebaseRecyclerAdapter<OrderGet,OrderViewHolder>FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<OrderGet, OrderViewHolder>
                 (OrderGet.class,R.layout.order_card,OrderViewHolder.class,databaseReference) {
             @Override

@@ -15,19 +15,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
-
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 
 public class EducationFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Initializing the view
+
         View view = inflater.inflate(R.layout.education_fragment,container,false);
+
+        //Progressbar for page load
         final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+
         WebView web = (WebView)view.findViewById(R.id.blogURL);
             web.loadUrl("https://neilpatel.com/blog");
             web.clearCache(true);

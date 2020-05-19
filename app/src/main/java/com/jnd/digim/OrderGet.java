@@ -1,5 +1,8 @@
 package com.jnd.digim;
 
+/*
+ * Methods, Getters-Setters and constructors for getting the order
+ * */
 public class OrderGet {
     String orderType;
     String order;
@@ -26,7 +29,7 @@ public class OrderGet {
     public void setOrder(String order) {
         this.order = order;
     }
-//
+
     public String getOrderId() {
         return orderId;
     }

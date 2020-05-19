@@ -1,5 +1,8 @@
 package com.jnd.digim;
 
+/*
+ * Methods, Getters-Setters and constructors for getting the ratings
+ * */
 public class RatingGet {
     String complain;
     String starRating;

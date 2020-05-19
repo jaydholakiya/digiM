@@ -1,12 +1,9 @@
 package com.jnd.digim;
 
-import android.app.ActionBar;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,14 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
@@ -47,16 +42,25 @@ import java.util.UUID;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class IdeaFragment extends Fragment {
+
+    //Recycler view for Idea Getting
+
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //View initialized
         View view = inflater.inflate(R.layout.idea_fragment,container,false);
+
+        //Showing the progress
         final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
         final TextView noIdeasTxt = (TextView)view.findViewById(R.id.textIdea);
         progressBarDashboard.setVisibility(View.VISIBLE);
+
+        //For showing "No ideas"
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,6 +74,8 @@ public class IdeaFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+
+        //Database path
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas/");
         mDatabase.keepSynced(true);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdea);
@@ -79,6 +85,8 @@ public class IdeaFragment extends Fragment {
         final FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final FloatingActionButton idea = (FloatingActionButton)view.findViewById(R.id.shareIdea);
+
+        //For sending the idea
         idea.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -105,9 +113,12 @@ public class IdeaFragment extends Fragment {
                                 Idea ideas = new Idea(uniqueIdea,ideaId,senderName,timeStamp);
                                 databaseReference[0].child(databaseReference[0].push().getKey()).setValue(ideas);
                                 idea.setText("");
+
+                                //Notification for Greater than OREO API level
                                 if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
                                     Toast.makeText(getContext(), "Idea shared successfully", Toast.LENGTH_SHORT).show();
                                 }
+
                                 if(bottomSheetDialog.isShowing()) {
                                     bottomSheetDialog.dismiss();
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -165,6 +176,8 @@ public class IdeaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        //Idea getting FirebaseRecycler
         FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder> FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
                 (IdeaGet.class,R.layout.idea_card,IdeaViewHolder.class,mDatabase) {
             @Override

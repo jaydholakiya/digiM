@@ -3,12 +3,10 @@ package com.jnd.digim;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -25,21 +23,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private Button signUpBtn;
     Map<String, Object> Users = new HashMap<>();
@@ -49,7 +45,11 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
+
+        //Setting animations for the Activity
+
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
+
         RelativeLayout myLayout = findViewById(R.id.loginLayout);
         TextView digiM = findViewById(R.id.digimLogoSignup);
         EditText firstName = findViewById(R.id.firstName);
@@ -78,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    //Storing data to Firebase
     public void storeData() {
         final EditText firstName = findViewById(R.id.firstName);
         final EditText lastName = findViewById(R.id.lastName);
@@ -109,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
     });
 }
 
+    //For SignUp data
     public void signUp(View coordinatorLayout) {
         final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBarSignUp);
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -121,14 +123,18 @@ public class SignupActivity extends AppCompatActivity {
         String lname = lastName.getText().toString();
         final String email = emailSignup.getText().toString();
         final String password = passwordSignup.getText().toString();
+
         ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+
         if( activeNetwork != null && activeNetwork.isConnected() ) {
-            progressBar.setVisibility(View.VISIBLE);
+
             if( firstName.length() == 0 || lastName.length() == 0 || emailSignup.length() == 0 || passwordSignup.length() == 0 ) {
                 Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
             }
+
             else if ( fname.length() >= 3 && lname.length() >= 3 && ( email.length() > 1 || email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+") ) && password.length() >= 6 ) {
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

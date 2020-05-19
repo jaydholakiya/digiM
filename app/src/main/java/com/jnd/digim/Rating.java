@@ -1,5 +1,8 @@
 package com.jnd.digim;
 
+/*
+ * Methods, Getters-Setters and constructors for sending the feedbacks
+ * */
 public class Rating {
 
     String complaineeName;

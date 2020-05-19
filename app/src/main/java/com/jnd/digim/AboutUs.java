@@ -16,13 +16,22 @@ public class AboutUs extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /*
+        * For Carousel hiding
+        * */
         CarouselView carouselView;
         carouselView = getActivity().findViewById(R.id.carouselView);
         carouselView.setVisibility(View.GONE);
 
+        /*
+        * For YouTube video hiding
+        * */
+
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
         youTubePlayerFragment.getView().setVisibility(View.GONE);
+
         return inflater.inflate(R.layout.about_us,container,false);
     }
 }

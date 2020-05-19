@@ -47,20 +47,21 @@ import com.squareup.okhttp.internal.DiskLruCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.UUID;
 
-import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static android.os.Build.VERSION_CODES.O;
-import static android.view.View.GONE;
-import static java.lang.String.valueOf;
 
 public class PromoteFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //Initializing the view
+        View view = inflater.inflate(R.layout.promote_fragment, container, false);
+
+        //Checking the promotion paytm payment line from database
         FirebaseDatabase.getInstance().getReference().child("lineData").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,19 +74,23 @@ public class PromoteFragment extends Fragment {
                     }).setActionTextColor(Color.RED).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}});
+
+        //Getting buttons from xml
         final String[] promotion = new String[1];
         final String[] data = new String[1];
         final FirebaseDatabase db = FirebaseDatabase.getInstance();
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
-        final View view = inflater.inflate(R.layout.promote_fragment, container, false);
         final RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.socialRadio);
         final TextView selectedText = (TextView)view.findViewById(R.id.promotionData);
         final EditText url = (EditText)view.findViewById(R.id.urlLink);
         final EditText mobileNo = (EditText)view.findViewById(R.id.mobileNo);
         final EditText transaction = (EditText)view.findViewById(R.id.transactionId);
         Button buttonOrder = (Button)view.findViewById(R.id.placeOrder);
+
+        //Radio button onClick services list load
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -96,25 +101,32 @@ public class PromoteFragment extends Fragment {
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         DatabaseReference instagramDb = db.getReference("Promotion list/Instagram");
                         instagramDb.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<Object> promotions = new ArrayList<>();
+
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     String data = postSnapshot.getValue(String.class);
                                     promotions.add(data);
                                 }
-                                final String a[] = promotions.toArray(new String[0]);
+
+                                final String services[] = promotions.toArray(new String[0]);
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
                                 builder.setTitle("Select services of Instagram");
-                                builder.setSingleChoiceItems(a, -1, new DialogInterface.OnClickListener() {
+
+                                builder.setSingleChoiceItems(services, -1, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        data[0] =a[which];
+                                        data[0] =services[which];
                                     }
                                 });
+
                                 builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Changing the Array to string
                                         selectedText.setText(Arrays.toString(data).replace("[","").replace("]",""));
                                     }
                                 });
@@ -129,46 +141,57 @@ public class PromoteFragment extends Fragment {
                                 builder.show();
                                 radioGroup.setVisibility(View.VISIBLE);
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(getContext(), "" + databaseError.toException(), Toast.LENGTH_SHORT).show();
                             }
+
                         });
                         break;
+
                     case R.id.twitterRadio:
                         radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Twitter";
                         FirebaseDatabase dbInsta = FirebaseDatabase.getInstance();
                         DatabaseReference twitterDb = dbInsta.getReference("Promotion list/Twitter");
                         twitterDb.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<Object> promotions = new ArrayList<>();
+
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     String data = postSnapshot.getValue(String.class);
                                     promotions.add(data);
                                 }
-                                final String a[] = promotions.toArray(new String[0]);
+
+                                final String services[] = promotions.toArray(new String[0]);
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
                                 builder.setTitle("Select services of Twitter");
-                                builder.setSingleChoiceItems(a, -1, new DialogInterface.OnClickListener() {
+                                builder.setSingleChoiceItems(services, -1, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        data[0] =a[which];
+                                        data[0] =services[which];
                                     }
                                 });
+
                                 builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Changing the Array to string
                                         selectedText.setText(Arrays.toString(data).replace("[","").replace("]",""));
                                     }
                                 });
+
                                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         builder.create().dismiss();
                                     }
                                 });
+
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
@@ -179,42 +202,52 @@ public class PromoteFragment extends Fragment {
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(getContext(), "" + databaseError.toException(), Toast.LENGTH_SHORT).show();
                             }
+
                         });
                         break;
+
                     case R.id.tiktokRadio:
                         radioGroup.setVisibility(View.GONE);
                         promotion[0] = "TikTok";
                         FirebaseDatabase dbTikTok = FirebaseDatabase.getInstance();
                         DatabaseReference tiktokDb = dbTikTok.getReference("Promotion list/TikTok");
                         tiktokDb.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<Object> promotions = new ArrayList<>();
+
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     String data = postSnapshot.getValue(String.class);
                                     promotions.add(data);
                                 }
-                                final String a[] = promotions.toArray(new String[0]);
+
+                                final String services[] = promotions.toArray(new String[0]);
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setTitle("Select services of TikTok");
-                                builder.setSingleChoiceItems(a, -1, new DialogInterface.OnClickListener() {
+
+                                builder.setSingleChoiceItems(services, -1, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        data[0] =a[which];
+                                        data[0] =services[which];
                                     }
                                 });
+
                                 builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Changing the Array to string
                                         selectedText.setText(Arrays.toString(data).replace("[","").replace("]",""));
                                     }
                                 });
+
                                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         builder.create().dismiss();
                                     }
                                 });
+
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
@@ -225,42 +258,52 @@ public class PromoteFragment extends Fragment {
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(getContext(), "" + databaseError.toException(), Toast.LENGTH_SHORT).show();
                             }
+
                         });
                         break;
+
                     case R.id.youtubeRadio:
                         radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Youtube";
                         FirebaseDatabase dbYoutube = FirebaseDatabase.getInstance();
                         DatabaseReference youtubeDb = dbYoutube.getReference("Promotion list/Youtube");
                         youtubeDb.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<Object> promotions = new ArrayList<>();
+
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     String data = postSnapshot.getValue(String.class);
                                     promotions.add(data);
                                 }
-                                final String a[] = promotions.toArray(new String[0]);
+
+                                final String services[] = promotions.toArray(new String[0]);
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setTitle("Select services of Youtube");
-                                builder.setSingleChoiceItems(a, -1, new DialogInterface.OnClickListener() {
+
+                                builder.setSingleChoiceItems(services, -1, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        data[0] =a[which];
+                                        data[0] =services[which];
                                     }
                                 });
+
                                 builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Changing the Array to string
                                         selectedText.setText(Arrays.toString(data).replace("[","").replace("]",""));
                                     }
                                 });
+
                                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         builder.create().dismiss();
                                     }
                                 });
+
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
@@ -271,42 +314,52 @@ public class PromoteFragment extends Fragment {
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(getContext(), "" + databaseError.toException(), Toast.LENGTH_SHORT).show();
                             }
+
                         });
                         break;
+
                     case R.id.facebookRadio:
                         radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Facebook";
                         FirebaseDatabase dbFacebook = FirebaseDatabase.getInstance();
                         DatabaseReference facebookDb = dbFacebook.getReference("Promotion list/Facebook");
                         facebookDb.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 ArrayList<Object> promotions = new ArrayList<>();
+
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     String data = postSnapshot.getValue(String.class);
                                     promotions.add(data);
                                 }
-                                final String a[] = promotions.toArray(new String[0]);
+
+                                final String services[] = promotions.toArray(new String[0]);
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setTitle("Select services of Facebook");
-                                builder.setSingleChoiceItems(a, -1, new DialogInterface.OnClickListener() {
+
+                                builder.setSingleChoiceItems(services, -1, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        data[0] = a[which];
+                                        data[0] = services[which];
                                     }
                                 });
+
                                 builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //Changing the Array to string
                                         selectedText.setText(Arrays.toString(data).replace("[","").replace("]",""));
                                     }
                                 });
+
                                 builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         builder.create().dismiss();
                                     }
                                 });
+
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
@@ -317,12 +370,14 @@ public class PromoteFragment extends Fragment {
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                                 Toast.makeText(getContext(), "" + databaseError.toException(), Toast.LENGTH_SHORT).show();
                             }
+
                         });
                         break;
                 }
             }
         });
 
+        //Place order functionality
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -361,9 +416,12 @@ public class PromoteFragment extends Fragment {
                                 url.setText("");
                                 transaction.setText("");
                                 mobileNo.setText("");
+
+                                //Notifications for promote with Filtering OREO devices
                                 if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
                                     Toast.makeText(getContext(), "Order placed successfully", Toast.LENGTH_SHORT).show();
                                 }
+
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                     String id = "id_product";
@@ -391,6 +449,7 @@ public class PromoteFragment extends Fragment {
                                             .setDefaults(NotificationCompat.DEFAULT_ALL);
                                     notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
                                 }
+
                                 else{
                                     NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                     Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")

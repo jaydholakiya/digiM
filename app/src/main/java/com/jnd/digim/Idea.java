@@ -1,5 +1,9 @@
 package com.jnd.digim;
 
+/*
+* Methods, Getters-Setters and constructors for sending the idea
+* */
+
 public class Idea {
     String uniqueIdea;
     String ideaId;

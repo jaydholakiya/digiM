@@ -1,5 +1,8 @@
 package com.jnd.digim;
 
+/*
+ * Methods, Getters-Setters and constructors for getting the idea
+ * */
 public class IdeaGet {
     private String uniqueIdea;
     private String senderName;

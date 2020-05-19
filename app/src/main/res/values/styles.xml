@@ -9,15 +9,18 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <!--Animation for activity-->
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitTransition">@android:anim/fade_out</item>
     </style>
 
+    <!--BottomSheet for ideas and rating-->
     <style name="BottomSheet" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
-    
+
+    <!--BottomSheet for ideas and rating modal-->
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>

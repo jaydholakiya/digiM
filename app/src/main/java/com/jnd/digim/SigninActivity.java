@@ -1,7 +1,6 @@
 package com.jnd.digim;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -9,7 +8,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -34,12 +32,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SigninActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private ProgressBar progressBarSignin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Activity animations
+
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
         TextView digiM = findViewById(R.id.digimLogoLogin);
         EditText emailLogin = findViewById(R.id.emailLogin);
@@ -59,13 +62,17 @@ public class SigninActivity extends AppCompatActivity {
         forgotPass.startAnimation(fade);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+
+        //Email getting from SignUp activity when SignedUp
         if( bundle != null ) {
             String string = (String)bundle.get("Email");
             emailLogin.setText(string);
         }
+
         if( !emailLogin.getText().toString().isEmpty() ) {
             Toast.makeText(this, "Please sign in with your new account", Toast.LENGTH_LONG).show();
         }
+
         noAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +83,13 @@ public class SigninActivity extends AppCompatActivity {
         });
     }
 
+    //For "Forgot Password" sending mail
     public void forgotPassword(View view) {
+
         final TextView forgotPass = findViewById(R.id.forgotPass);
+
         forgotPass.setEnabled(false);
+
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
         EditText emailForgot = findViewById(R.id.emailLogin);
@@ -86,12 +97,14 @@ public class SigninActivity extends AppCompatActivity {
         final String emailReplaced = email.replace(" ","");
         ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
+
         if( activeNetwork != null && activeNetwork.isConnected() ) {
             if ( emailReplaced.length() == 0 ) {
                 Toast.makeText(this, emailReplaced, Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Email is required for forgot password", Toast.LENGTH_SHORT).show();
                 forgotPass.setEnabled(true);
             }
+
             else {
                 mAuth.getInstance().sendPasswordResetEmail(emailReplaced).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -137,6 +150,9 @@ public class SigninActivity extends AppCompatActivity {
                             forgotPass.setEnabled(true);
                         }
                         else {
+
+                            //Notifications for password reset with Filtering OREO devices
+
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
                                 String id = "id_product";
@@ -185,6 +201,7 @@ public class SigninActivity extends AppCompatActivity {
         }
     }
 
+    //SignIn method
     public void signIn(View coordinatorLayout) {
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);

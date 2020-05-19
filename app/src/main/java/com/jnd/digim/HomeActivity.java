@@ -4,19 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,13 +21,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -56,11 +46,15 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Setting the toolbar as Action bar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Setting the title for Actionbar of Home Activity
         setTitle("digiM");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Navigation icon of Actionbar
         toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +62,13 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
                 mDrawer.openDrawer(GravityCompat.START);
             }
         });
+
         mDrawer = (DrawerLayout)findViewById(R.id.navDrawer);
         nvDrawer = (NavigationView)findViewById(R.id.nvView);
+
         setupDrawerContent(nvDrawer);
 
+        //On brand logo click, view the branding scheme
         NavigationView navigationView = (NavigationView)findViewById(R.id.nvView);
         View headerView = navigationView.getHeaderView(0);
         TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderHome);
@@ -84,6 +81,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             }
         });
 
+        //For navigating to the Main Activity(Login Activity)
         TextView login = (TextView)findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,35 +91,22 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             }
         });
 
+        //Carousel View created
         carouselView = findViewById(R.id.carouselView);
         carouselView.setPageCount(images.length);
         carouselView.setImageListener(imageListener);
         openSnackbar(carouselView);
+
+        //Setting animations for Activity
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
 
-
-//        YouTubePlayerView youTubePlayerView = findViewById(R.id.youTube);
-//        YouTubePlayer.OnInitializedListener onInitializedListener;
-//
-//        onInitializedListener = new YouTubePlayer.OnInitializedListener() {
-//            @Override
-//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//                youTubePlayer.loadVideo("0trAMd1GYVc");
-//            }
-//
-//            @Override
-//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//
-//            }
-//        };
-//
-//        youTubePlayerView.initialize(YouTubeConfig.getApiKey(),onInitializedListener);
-
+        //YouTube video initializing
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youTube);
         youTubePlayerFragment.initialize(YouTubeConfig.getApiKey(),this);
     }
 
+    //Sign-in suggetion Snackbar opening
     public void openSnackbar(View coordinatorLayout) {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             Snackbar snackbar = Snackbar.make(coordinatorLayout,"Please sign-in to active services",BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("CLOSE", new View.OnClickListener() {
@@ -138,6 +123,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         else findViewById(R.id.login).setVisibility(View.GONE);
     }
 
+    //Images for Carousel
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
@@ -189,7 +175,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.homeFrame,fragment).commit();
         item.setChecked(true);
-        setTitle(item.getTitle());
+        setTitle(item.getTitle());          //Setting the title of the Action bar
         mDrawer.closeDrawers();
     }
 
@@ -199,6 +185,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
 
+        //Custom logic for navigating to back in HomeActivity
         else if(getTitle().equals("Working") || getTitle().equals("About Us") || getTitle().equals("Contact Us") || getTitle().equals("Developer Info") )
         {
             Intent i = new Intent(HomeActivity.this, HomeActivity.class);
@@ -228,6 +215,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         }
     }
 
+    //Youtube video link initializing
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         youTubePlayer.loadVideo("0trAMd1GYVc");

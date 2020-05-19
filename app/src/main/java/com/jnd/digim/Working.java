@@ -18,12 +18,17 @@ public class Working extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //Initializing the view for Working screen and PDF view
         View view = inflater.inflate(R.layout.working,container,false);
         Button viewPDF = (Button)view.findViewById(R.id.download);
+
+        //Hiding the Carousel
         CarouselView carouselView;
         carouselView = getActivity().findViewById(R.id.carouselView);
         carouselView.setVisibility(View.GONE);
 
+        //YouTube video hiding
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
         youTubePlayerFragment.getView().setVisibility(View.GONE);

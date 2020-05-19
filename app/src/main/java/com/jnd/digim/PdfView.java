@@ -14,6 +14,7 @@ public class PdfView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pdf_view);
 
+        //Initialized the PDF from the Assets folder
         PDFView pdfView = (PDFView)findViewById(R.id.pdfViewLayout);
         pdfView.fromAsset("digiM.pdf")
                 .enableSwipe(true) // allows to block changing pages using swipe

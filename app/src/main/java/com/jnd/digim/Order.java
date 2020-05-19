@@ -1,5 +1,8 @@
 package com.jnd.digim;
 
+/*
+ * Methods, Getters-Setters and constructors for sending the order
+ * */
 public class Order {
     String order;
     String orderType;
@@ -65,6 +68,6 @@ public class Order {
         return orderReviewed;
     }
 
-//    public void Order(){}
+    public void Order(){}
 
 }

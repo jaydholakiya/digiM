@@ -1,9 +1,7 @@
 package com.jnd.digim;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,80 +9,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-//import androidx.fragment.app.Fragment;
-import com.google.android.gms.maps.MapFragment;
-
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.synnapps.carouselview.CarouselView;
 
-import java.io.File;
-
-public class ContactUs extends Fragment implements OnMapReadyCallback
-{
-    //    GoogleMap googleMap;
-//    MapView mapView;
-//
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        if(mapView!=null){
-//            mapView.onCreate(null);
-//            mapView.onResume();
-//            mapView.getMapAsync(this);
-//        }
-//    }
-
+public class ContactUs extends Fragment implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //Initializing the view
         View view = inflater.inflate(R.layout.contact_us,container,false);
+
+        //Carousel hiding
         CarouselView carouselView;
         carouselView = getActivity().findViewById(R.id.carouselView);
         carouselView.setVisibility(View.GONE);
 
+        //YouTube video hiding
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
         youTubePlayerFragment.getView().setVisibility(View.GONE);
 
-//        Context context = null;
-//        MapView mapView = (MapView)view.findViewById(R.id.mapView);
-//        mapView.onCreate(savedInstanceState);
-//        mapView.onResume();
-//        try{
-//            MapsInitializer.initialize(getActivity().getApplicationContext());
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        mapView.getMapAsync(new OnMapReadyCallback() {
-//            @Override
-//            public void onMapReady(GoogleMap mMap) {
-//                googleMap=mMap;
-//                googleMap.setMyLocationEnabled(true);
-//                LatLng latLng = new LatLng(19.169257,73.341601);
-////                googleMap.animateCamera(new MarkerOptions().position(latLng).title("Suyog Bunglows").snippet("It is a digital marketers company"));
-//                CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();
-//                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//            }
-//        });
+        /*
+        * Social media links
+        * */
+
         ImageView facebookIcon = (ImageView)view.findViewById(R.id.facebookIcon);
         facebookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +80,8 @@ public class ContactUs extends Fragment implements OnMapReadyCallback
             }
         });
 
+        //Email intent with mail id
+
         TextView email = (TextView)view.findViewById(R.id.commuEmail);
         email.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,9 +93,6 @@ public class ContactUs extends Fragment implements OnMapReadyCallback
             }
         });
 
-//        mapView = (MapView)view.findViewById(R.id.map);
-//        mapView.onCreate(savedInstanceState);
-//        mapView.getMapAsync(this);
         return view;
     }
 
@@ -148,58 +106,7 @@ public class ContactUs extends Fragment implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng marker = new LatLng(23.007927,72.507171);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,13));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,15));
         googleMap.addMarker(new MarkerOptions().title("Suyog Bunglows").position(marker));
     }
-
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//
-//        MapsInitializer.initialize(getContext());
-//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//        googleMap.addMarker(new MarkerOptions().position(new LatLng(19.169257,73.341601)).title("Suyog Bunglows").snippet("Communication Address"));
-//        CameraPosition Suyog = CameraPosition.builder().target(new LatLng(19.169257,73.341601)).zoom(16).bearing(0).tilt(45).build();
-//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Suyog));
-//    }
-
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        GoogleMap map = googleMap;
-//        map.getUiSettings().setMyLocationButtonEnabled(false);
-//        map.setMyLocationEnabled(true);
-//
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(21.5222, 70.4579),21);
-//        map.animateCamera(cameraUpdate);
-//        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(21.5222, 70.4579)));
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mapView.onResume();
-//    }
-//
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        mapView.onPause();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        mapView.onDestroy();
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//        super.onLowMemory();
-//        mapView.onLowMemory();
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//
-//    }
 }

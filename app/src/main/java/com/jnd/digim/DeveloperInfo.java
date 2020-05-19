@@ -21,15 +21,21 @@ public class DeveloperInfo extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Initializing the view
+
         View view = inflater.inflate(R.layout.developer_info,container,false);
+
+        //Carousel hiding
         CarouselView carouselView;
         carouselView = getActivity().findViewById(R.id.carouselView);
         carouselView.setVisibility(View.GONE);
 
+        //YouTube video hiding
         YouTubePlayerFragment youTubePlayerFragment =
                 (YouTubePlayerFragment) getActivity().getFragmentManager().findFragmentById(R.id.youTube);
         youTubePlayerFragment.getView().setVisibility(View.GONE);
 
+        //Setting images for developer and concept person
         ImageView avatarDeveloper = (ImageView)view.findViewById(R.id.profilePicDeveloper);
         Glide.with(getActivity().getApplicationContext())
                 .load(getImage("jay_croped"))
@@ -41,6 +47,7 @@ public class DeveloperInfo extends Fragment {
                 startActivity(instagramIcon);
             }
         });
+
         ImageView avatarConcept = (ImageView)view.findViewById(R.id.profilePicConcept);
         Glide.with(getActivity().getApplicationContext())
                 .load("https://pbs.twimg.com/media/ESQqEIaXYAIBkZM?format=jpg&name=4096x4096")
@@ -55,6 +62,7 @@ public class DeveloperInfo extends Fragment {
         return view;
     }
 
+    //Getting the image from the "drawable"
     public int getImage(String image){
         int profilePic = this.getResources().getIdentifier("jay_croped","drawable",getActivity().getPackageName());
         return profilePic;

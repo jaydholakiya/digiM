@@ -1,25 +1,19 @@
 package com.jnd.digim;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,10 +30,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class DashboardActivity extends AppCompatActivity {
+
+    FirebaseAuth mAuth;
+
+    //Bottom navigation view created
     BottomNavigationView bottomNavigationView;
 
     private DrawerLayout mDrawer;
@@ -52,14 +47,21 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         bottomNavigationView = findViewById(R.id.bottomNav);
+
+        //Setting animation for starting and ending the activity
         getWindow().setWindowAnimations(R.style.WindowAnimationTransition);
-        if(FirebaseAuth.getInstance().getCurrentUser()==null){
+
+        //If user is logged out, then Disable Home menu in navigation drawer
+        if( mAuth.getInstance().getCurrentUser() == null ){
             ((NavigationView)findViewById(R.id.nvView)).getMenu().findItem(R.id.homeMain).setVisible(false);
         }
 
-        else{
+        //If user is logged in, then Disable login in Action bar of Dashboard Activity
+        else {
             findViewById(R.id.login).setVisibility(View.GONE);
         }
+
+        //Setting the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
@@ -69,17 +71,23 @@ public class DashboardActivity extends AppCompatActivity {
                 mDrawer.openDrawer(GravityCompat.START);
             }
         });
+
         setTitle("My Dashboard");
+
         mDrawer = (DrawerLayout)findViewById(R.id.navDrawer);
         nvDrawer = (NavigationView)findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nvView);
         View headerView = navigationView.getHeaderView(0);
         TextView username = (TextView)headerView.findViewById(R.id.username);
+
+        //Setting profilePicture in header of Navigation drawer of dashboard
+
         final ImageView profilePic = (ImageView)headerView.findViewById(R.id.profilePic);
         Glide.with(this)
                 .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .into(profilePic);
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +96,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        //Brand logo opening
         TextView digiMLogoDashboard = (TextView)headerView.findViewById(R.id.digiMHeaderDashboard);
         digiMLogoDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,8 +106,10 @@ public class DashboardActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         username.setText("Welcome, " + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
+        //On load activity, set the base activity to Idea fragment
         if( savedInstanceState == null ) {
             getSupportFragmentManager().beginTransaction().replace(R.id.dashboardFrame,new IdeaFragment()).commit();
         }
@@ -127,6 +138,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
+    //CropImage picking image from camera or gallery
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
@@ -206,7 +218,7 @@ public class DashboardActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.dashboardFrame,fragment).commit();
         item.setChecked(true);
-        setTitle(item.getTitle());
+        setTitle(item.getTitle());                  //Setting title of header menu to action bar
         mDrawer.closeDrawers();
     }
 
@@ -216,6 +228,7 @@ public class DashboardActivity extends AppCompatActivity {
             this.mDrawer.closeDrawer(GravityCompat.START);
         }
         else{
+            //For navigating back through the profiles
             if( getTitle().equals("Edit Profile") || getTitle().equals("Change Password") || getTitle().equals("Rate Us") || getSupportActionBar().getTitle().equals("Edit Profile") || getSupportActionBar().getTitle().equals("Change Password") || getSupportActionBar().getTitle().equals("Rate Us") ){
                 Intent dashboardIntent = new Intent(DashboardActivity.this,DashboardActivity.class);
                 startActivity(dashboardIntent);
