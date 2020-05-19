@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,8 @@ public class EditProfile extends Fragment {
         View view = inflater.inflate(R.layout.edit_profile,container,false);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)getActivity().findViewById(R.id.bottomNav);
         bottomNavigationView.setVisibility(View.GONE);
-
+        final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+        progressBarDashboard.setVisibility(View.VISIBLE);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Edit Profile");
 
         ImageButton removePic = (ImageButton)view.findViewById(R.id.removePic);
@@ -88,34 +90,36 @@ public class EditProfile extends Fragment {
                 });
             }
         });
-
-        db.collection("Users").document(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if ( task.isSuccessful() ) {
-                        ConnectivityManager conn_Manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
-                        if( activeNetwork != null && activeNetwork.isConnected() ) {
-                            try {
-                                JSONObject json = new JSONObject(task.getResult().getData().toString());
-                                firstNameEdit.setText(json.getString("firstname"));
-                                lastNameEdit.setText(json.getString("lastname"));
-    //                            emailEdit.setText(json.getString("email"));
-                            }
-                            catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+        ConnectivityManager conn_Manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = conn_Manager.getActiveNetworkInfo();
+        if( activeNetwork != null && activeNetwork.isConnected() ) {
+            db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        try {
+                            JSONObject json = new JSONObject(task.getResult().getData().toString());
+                            firstNameEdit.setText(json.getString("firstname"));
+                            lastNameEdit.setText(json.getString("lastname"));
+                            progressBarDashboard.setVisibility(View.GONE);
+                            //emailEdit.setText(json.getString("email"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        else Toast.makeText(getContext(), "Network error", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(), "No document", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else{
-                    Toast.makeText(getContext(), "No document", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+        }
+        else Toast.makeText(getContext(), "Network error", Toast.LENGTH_SHORT).show();
+
         submitProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBarDashboard.setVisibility(View.VISIBLE);
                 InputMethodManager im = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 im.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
                 ConnectivityManager conn_Manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -135,6 +139,7 @@ public class EditProfile extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
+                                    progressBarDashboard.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
                                     Intent dashboard = new Intent(getActivity(),DashboardActivity.class);
                                     startActivity(dashboard);

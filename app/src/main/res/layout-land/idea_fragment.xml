@@ -6,7 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/whiteBackground"
     android:windowSoftInputMode="adjustResize">
-
+    <TextView
+        android:id="@+id/textIdea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="No more ideas"
+        android:textColor="@color/textColor"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerIdea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerIdea"
+        android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerIdea"
         android:layout_width="match_parent"

@@ -70,63 +70,63 @@
         android:id="@+id/promotionData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="No promotion selected"
         android:textColor="@color/textColor"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/urlLink"
-        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
-        app:layout_constraintStart_toStartOf="@+id/socialRadio"
-        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
+        app:layout_constraintEnd_toEndOf="@+id/promotions"
+        app:layout_constraintStart_toStartOf="@+id/promotions" />
 
     <EditText
         android:id="@+id/urlLink"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
         android:hint="Paste your social media URL..."
         android:inputType="textMultiLine"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="@+id/socialRadio"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/socialRadio"
-        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
+        app:layout_constraintBottom_toTopOf="@+id/transactionId"
+        app:layout_constraintEnd_toEndOf="@+id/promotions"
+        app:layout_constraintStart_toStartOf="@+id/promotions" />
 
     <EditText
         android:id="@+id/transactionId"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="Transaction Id"
-        android:layout_marginTop="25dp"
         android:inputType="text"
         android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/mobileNo"
         app:layout_constraintEnd_toEndOf="@+id/urlLink"
-        app:layout_constraintStart_toStartOf="@+id/urlLink"
-        app:layout_constraintTop_toBottomOf="@+id/urlLink" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/urlLink" />
 
     <EditText
         android:id="@+id/mobileNo"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp"
         android:hint="Mobile No."
         android:inputType="number"
         android:maxLength="10"
         android:textColor="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/placeOrder"
         app:layout_constraintEnd_toEndOf="@+id/transactionId"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/transactionId"
-        app:layout_constraintTop_toBottomOf="@+id/transactionId" />
+        app:layout_constraintStart_toStartOf="@+id/transactionId" />
 
     <Button
         android:id="@+id/placeOrder"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/button"
         android:text="Place Order"
         android:textColor="#FFFFFF"
-        android:background="@drawable/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/mobileNo"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/mobileNo"
-        app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
+        app:layout_constraintStart_toStartOf="@+id/mobileNo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

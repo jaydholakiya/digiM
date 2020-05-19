@@ -53,6 +53,7 @@ import java.util.UUID;
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.os.Build.VERSION_CODES.O;
+import static android.view.View.GONE;
 import static java.lang.String.valueOf;
 
 public class PromoteFragment extends Fragment {
@@ -90,6 +91,7 @@ public class PromoteFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch(checkedId) {
                     case R.id.instagramRadio:
+                        radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Instagram";
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         DatabaseReference instagramDb = db.getReference("Promotion list/Instagram");
@@ -125,6 +127,7 @@ public class PromoteFragment extends Fragment {
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
+                                radioGroup.setVisibility(View.VISIBLE);
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -133,6 +136,7 @@ public class PromoteFragment extends Fragment {
                         });
                         break;
                     case R.id.twitterRadio:
+                        radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Twitter";
                         FirebaseDatabase dbInsta = FirebaseDatabase.getInstance();
                         DatabaseReference twitterDb = dbInsta.getReference("Promotion list/Twitter");
@@ -168,6 +172,7 @@ public class PromoteFragment extends Fragment {
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
+                                radioGroup.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -177,6 +182,7 @@ public class PromoteFragment extends Fragment {
                         });
                         break;
                     case R.id.tiktokRadio:
+                        radioGroup.setVisibility(View.GONE);
                         promotion[0] = "TikTok";
                         FirebaseDatabase dbTikTok = FirebaseDatabase.getInstance();
                         DatabaseReference tiktokDb = dbTikTok.getReference("Promotion list/TikTok");
@@ -212,6 +218,7 @@ public class PromoteFragment extends Fragment {
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
+                                radioGroup.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -221,6 +228,7 @@ public class PromoteFragment extends Fragment {
                         });
                         break;
                     case R.id.youtubeRadio:
+                        radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Youtube";
                         FirebaseDatabase dbYoutube = FirebaseDatabase.getInstance();
                         DatabaseReference youtubeDb = dbYoutube.getReference("Promotion list/Youtube");
@@ -256,6 +264,7 @@ public class PromoteFragment extends Fragment {
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
+                                radioGroup.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -265,6 +274,7 @@ public class PromoteFragment extends Fragment {
                         });
                         break;
                     case R.id.facebookRadio:
+                        radioGroup.setVisibility(View.GONE);
                         promotion[0] = "Facebook";
                         FirebaseDatabase dbFacebook = FirebaseDatabase.getInstance();
                         DatabaseReference facebookDb = dbFacebook.getReference("Promotion list/Facebook");
@@ -300,6 +310,7 @@ public class PromoteFragment extends Fragment {
                                 builder.setCancelable(false);
                                 builder.create().setCanceledOnTouchOutside(false);
                                 builder.show();
+                                radioGroup.setVisibility(View.VISIBLE);
                             }
 
                             @Override

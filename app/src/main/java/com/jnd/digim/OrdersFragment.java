@@ -5,10 +5,13 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +20,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
@@ -33,6 +39,22 @@ public class OrdersFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.order_fragment,container,false);
+        final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+        final TextView noOrdersTxt = (TextView)view.findViewById(R.id.textOrders);
+        progressBarDashboard.setVisibility(View.VISIBLE);
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Orders"+FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+"_"+FirebaseAuth.getInstance().getCurrentUser().getEmail().substring(0,FirebaseAuth.getInstance().getCurrentUser().getEmail().indexOf("."))+"_"+FirebaseAuth.getInstance().getUid())){}
+                else{
+                    progressBarDashboard.setVisibility(View.GONE);
+                    noOrdersTxt.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Orders").child(firebaseUser.getDisplayName()+"_"+firebaseUser.getEmail().substring(0,firebaseUser.getEmail().indexOf("."))+"_"+firebaseUser.getUid());
         databaseReference.keepSynced(true);
@@ -50,6 +72,10 @@ public class OrdersFragment extends Fragment {
                 (OrderGet.class,R.layout.order_card,OrderViewHolder.class,databaseReference) {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, OrderGet orderGet, int i) {
+                ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+                progressBarDashboard.setVisibility(View.GONE);
+                TextView noOrdersTxt = (TextView)getActivity().findViewById(R.id.textOrders);
+                noOrdersTxt.setVisibility(View.GONE);
                 orderViewHolder.setOrderType(orderGet.getOrderType());
                 orderViewHolder.setOrder(orderGet.getOrder());
                 orderViewHolder.setOrderId(orderGet.getOrderId());

@@ -17,12 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
@@ -34,8 +36,11 @@ import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.UUID;
 
@@ -49,6 +54,22 @@ public class IdeaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.idea_fragment,container,false);
+        final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+        final TextView noIdeasTxt = (TextView)view.findViewById(R.id.textIdea);
+        progressBarDashboard.setVisibility(View.VISIBLE);
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Ideas/")){}
+                else{
+                    progressBarDashboard.setVisibility(View.GONE);
+                    noIdeasTxt.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Ideas/");
         mDatabase.keepSynced(true);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerIdea);
@@ -59,7 +80,7 @@ public class IdeaFragment extends Fragment {
         final DatabaseReference[] databaseReference = new DatabaseReference[1];
         final FloatingActionButton idea = (FloatingActionButton)view.findViewById(R.id.shareIdea);
         idea.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.O)
+
             @Override
             public void onClick(View v) {
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheet);
@@ -143,12 +164,28 @@ public class IdeaFragment extends Fragment {
 
     @Override
     public void onStart() {
-
         super.onStart();
         FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder> FirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<IdeaGet, IdeaViewHolder>
                 (IdeaGet.class,R.layout.idea_card,IdeaViewHolder.class,mDatabase) {
             @Override
             protected void populateViewHolder(IdeaViewHolder ideaViewHolder, IdeaGet ideaGet, int i) {
+                FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild("Ideas")) {}
+                        else{
+                            TextView noIdeas = (TextView) getActivity().findViewById(R.id.textIdea);
+                            noIdeas.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {}
+                });
+                ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+                progressBarDashboard.setVisibility(View.GONE);
+                TextView noIdeas = (TextView) getActivity().findViewById(R.id.textIdea);
+                noIdeas.setVisibility(View.GONE);
                 ideaViewHolder.setUniqueIdea(ideaGet.getUniqueIdea());
                 ideaViewHolder.setSenderName(ideaGet.getSenderName());
                 ideaViewHolder.setTimeStamp(ideaGet.getTimeStamp());

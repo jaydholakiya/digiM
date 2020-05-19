@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     android:background="@color/whiteBackground">
 
+    <TextView
+        android:id="@+id/textOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="No orders"
+        android:textColor="@color/textColor"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/orderRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRecycler"
         android:layout_width="match_parent"

@@ -84,4 +84,11 @@
         android:text="@string/no_account"
         android:textColor="@color/textColor"
         android:textSize="20sp" />
+    <ProgressBar
+        android:id="@+id/progressBarSignin"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,21 +90,15 @@ public class SignupActivity extends AppCompatActivity {
         Users.put("email",mail);
         Users.put("firstname",fname);
         Users.put("lastname",lname);
-        db.collection("Users").add(Users).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("Users").document(mAuth.getCurrentUser().getUid()).set(Users).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
+            public void onSuccess(Void aVoid) {
                 firstName.setText("");
                 lastName.setText("");
                 emailSignup.setText("");
                 passwordSignup.setText("");
             }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignupActivity.this, "Error adding document - " + e, Toast.LENGTH_SHORT).show();
-                    }
-                });
+        });
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(fname + " " + lname).setPhotoUri(Uri.parse("https://firebasestorage.googleapis.com/v0/b/digim-9795e.appspot.com/o/digiM.png?alt=media&token=b8237f69-ec73-4956-83c0-66ab56527a25")).build();
         mAuth.getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -154,6 +149,7 @@ public class SignupActivity extends AppCompatActivity {
                 });
             }
             else {
+                progressBar.setVisibility(View.GONE);
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("SignUp Criteria");
                 alert.setMessage("All fields are required,\nFirst name and Last name length should be atleast 3 characters,\nPassword length should be atleast 3 characters");

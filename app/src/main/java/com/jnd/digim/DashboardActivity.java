@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         else{
-            findViewById(R.id.login).setVisibility(View.INVISIBLE);
+            findViewById(R.id.login).setVisibility(View.GONE);
         }
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,11 +133,14 @@ public class DashboardActivity extends AppCompatActivity {
         if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode==RESULT_OK){
+                final ProgressBar progressBarDashboard = (ProgressBar)findViewById(R.id.progressBarDashboard);
+                progressBarDashboard.setVisibility(View.VISIBLE);
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(Uri.parse(String.valueOf(result.getUri()))).build();
-            FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        progressBarDashboard.setVisibility(View.GONE);
                         Intent intent = new Intent(DashboardActivity.this,DashboardActivity.class);
                         startActivity(intent);
                         finish();

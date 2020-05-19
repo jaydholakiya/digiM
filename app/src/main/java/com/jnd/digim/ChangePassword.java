@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ public class ChangePassword extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.change_password,container,false);
-
+        final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)getActivity().findViewById(R.id.bottomNav);
         bottomNavigationView.setVisibility(View.GONE);
         final EditText pass = (EditText) view.findViewById(R.id.pass);
@@ -47,17 +48,21 @@ public class ChangePassword extends Fragment {
                 NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
                 if( activeNetwork != null && activeNetwork.isConnected() ) {
                     if(pass.getText().toString().length()>=6){
+                        progressBarDashboard.setVisibility(View.VISIBLE);
                         user.updatePassword(pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    progressBarDashboard.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Password changed succesfully.", Toast.LENGTH_SHORT).show();
                                     FirebaseAuth.getInstance().signOut();
                                     Intent homeIntent = new Intent(getContext(),HomeActivity.class);
                                     startActivity(homeIntent);
+                                    getActivity().finish();
                                     Toast.makeText(getContext(), "Please login first", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
+                                    progressBarDashboard.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Password change error", Toast.LENGTH_SHORT).show();
                                 }
                             }

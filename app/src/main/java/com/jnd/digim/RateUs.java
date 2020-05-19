@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,8 +36,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.UUID;
 
@@ -51,7 +55,22 @@ public class RateUs extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rate_us,container,false);
+        final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+        final TextView noRating = (TextView)view.findViewById(R.id.textRating);
+        progressBarDashboard.setVisibility(View.VISIBLE);
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Complains/"+FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+"_"+FirebaseAuth.getInstance().getCurrentUser().getEmail().substring(0,FirebaseAuth.getInstance().getCurrentUser().getEmail().indexOf("."))+"_"+FirebaseAuth.getInstance().getUid())){}
+                else{
+                    progressBarDashboard.setVisibility(View.GONE);
+                    noRating.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
         BottomNavigationView bottomNavigationView = (BottomNavigationView)getActivity().findViewById(R.id.bottomNav);
         bottomNavigationView.setVisibility(View.GONE);
 
@@ -165,6 +184,23 @@ public class RateUs extends Fragment {
                 (RatingGet.class,R.layout.recycler_rating,RatingViewHolder.class,mDatabase) {
             @Override
             protected void populateViewHolder(RatingViewHolder ratingViewHolder, RatingGet ratingGet, int i) {
+                FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild("Complains/"+FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+"_"+FirebaseAuth.getInstance().getCurrentUser().getEmail().substring(0,FirebaseAuth.getInstance().getCurrentUser().getEmail().indexOf("."))+"_"+FirebaseAuth.getInstance().getUid())){}
+                        else {
+                            TextView noRating = (TextView) getActivity().findViewById(R.id.textRating);
+                            noRating.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {}
+                });
+                ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
+                progressBarDashboard.setVisibility(View.GONE);
+                TextView noRating = (TextView) getActivity().findViewById(R.id.textRating);
+                noRating.setVisibility(View.GONE);
                 ratingViewHolder.setComplain(ratingGet.getComplain());
                 ratingViewHolder.setComplainTime(ratingGet.getComplainTime());
                 ratingViewHolder.setStarRating(ratingGet.getStarRating());

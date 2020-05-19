@@ -25,6 +25,7 @@
             android:layout_marginTop="79dp"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNav"
                 android:layout_width="match_parent"
@@ -47,8 +48,17 @@
             android:layout_gravity="start"
             android:background="@android:color/white"
             app:headerLayout="@layout/dashboard_header"
-            app:menu="@menu/dashboard_menu" />
+            app:menu="@menu/dashboard_menu" >
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
+    <ProgressBar
+        android:id="@+id/progressBarDashboard"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
