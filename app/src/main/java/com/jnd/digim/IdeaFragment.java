@@ -121,6 +121,7 @@ public class IdeaFragment extends Fragment {
                                         Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
                                                 .setContentText("Idea " + uniqueIdea + " submitted successfully")
                                                 .setSmallIcon(R.drawable.instagram_icon)
+                                                .setContentTitle("Idea sharing")
                                                 .setAutoCancel(true)
                                                 .build();
                                         notificationManager.notify((int) System.currentTimeMillis(),notification);

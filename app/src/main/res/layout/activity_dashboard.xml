@@ -23,7 +23,7 @@
             android:id="@+id/dashboardFrame"
             android:layout_width="wrap_content"
             android:layout_marginTop="79dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
         </FrameLayout>
 
@@ -43,9 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:animateLayoutChanges="true"
         android:background="@color/colorAccent"
+        android:clickable="true"
         android:textAlignment="center"
+        app:itemIconSize="24dp"
         app:itemIconTint="@color/common_google_signin_btn_text_dark"
+        app:itemRippleColor="#CDDC39"
         app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/menu" />
 

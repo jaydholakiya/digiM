@@ -125,7 +125,7 @@ public class RateUs extends Fragment {
                                             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(),"id_product")
                                                     .setSmallIcon(R.drawable.ic_notification_digim) //your app icon
                                                     .setChannelId(id)
-                                                    .setContentTitle("Promotion order")
+                                                    .setContentTitle("Rating")
                                                     .setAutoCancel(true)
                                                     .setNumber(2)
                                                     .setColor(255)
@@ -138,6 +138,7 @@ public class RateUs extends Fragment {
                                             NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                             Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
                                                     .setContentText("Your rated us with \"" + starRating + "\" with \"" + complain + "\" feedback")
+                                                    .setContentTitle("Rating")
                                                     .setSmallIcon(R.drawable.instagram_icon)
                                                     .setAutoCancel(true)
                                                     .build();

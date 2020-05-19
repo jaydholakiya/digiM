@@ -384,6 +384,7 @@ public class PromoteFragment extends Fragment {
                                     NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
                                     Notification notification = new Notification.Builder(getActivity()).setContentTitle("Idea submission")
                                             .setContentText("Your order \"" + order + "\" for \"" + orderType + "\" successfully placed")
+                                            .setContentTitle("Promotion order")
                                             .setSmallIcon(R.drawable.instagram_icon)
                                             .setAutoCancel(true)
                                             .build();

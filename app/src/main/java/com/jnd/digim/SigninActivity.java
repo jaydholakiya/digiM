@@ -127,6 +127,7 @@ public class SigninActivity extends AppCompatActivity {
                                 NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
                                 Notification notification = new Notification.Builder(getApplicationContext()).setContentTitle("Idea submission")
                                         .setContentText("Check your inbox of '" + emailReplaced + "' for password reset link")
+                                        .setContentTitle("Password reset")
                                         .setSmallIcon(R.drawable.instagram_icon)
                                         .setAutoCancel(true)
                                         .build();
