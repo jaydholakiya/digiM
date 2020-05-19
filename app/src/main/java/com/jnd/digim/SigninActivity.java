@@ -221,26 +221,4 @@ public class SigninActivity extends AppCompatActivity {
             Snackbar.make(coordinatorLayout,"Network error",Snackbar.LENGTH_LONG).show();
         }
     }
-
-    public void signOut() {
-        FirebaseAuth.getInstance().signOut();
-    }
-
-//    public void getIdeas() {
-//        FirebaseDatabase db = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = db.getReference("Ideas");
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Map<String,Object> map = (Map<String, Object>) dataSnapshot.getValue();
-////                String value = dataSnapshot.getValue(String.class);
-//                Toast.makeText(SigninActivity.this, "Value is : \n" + map, Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(SigninActivity.this, "Failed to read value : " + databaseError.toException(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }
