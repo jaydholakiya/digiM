@@ -51,7 +51,7 @@
                 android:layout_marginBottom="9dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/complain_time_text"
-                android:textColor="#493E3E"
+                android:textColor="@color/complainTimeColor"
                 android:textSize="15sp" />
         </LinearLayout>
 </androidx.cardview.widget.CardView>

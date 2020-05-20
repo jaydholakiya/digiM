@@ -133,7 +133,7 @@
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:text="@string/place_order_text"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/whiteBackground"
         app:layout_constraintEnd_toEndOf="@+id/mobileNo"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/mobileNo"

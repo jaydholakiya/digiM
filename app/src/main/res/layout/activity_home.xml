@@ -37,7 +37,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:radius="6dp"
                     app:slideInterval="4000"
-                    app:strokeColor="#FF777777"
+                    app:strokeColor="@color/carouselStrokeColor"
                     app:strokeWidth="1dp">
                 </com.synnapps.carouselview.CarouselView>
 

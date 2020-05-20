@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/logInName"
         android:textSize="18sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/whiteBackground"
         android:onClick="signIn"
         android:background="@drawable/button"
         android:layout_below="@+id/passwordLogin"

@@ -10,4 +10,7 @@
         <color name="whiteBackground">#E4DBDB</color>
         <color name="textColor">#AA000000</color>
         <color name="iconColors">#03A1E6</color>
+    <color name="itemRippleColor">#CDDC39</color>
+    <color name="carouselStrokeColor">#FF777777</color>
+    <color name="complainTimeColor">#493E3E</color>
 </resources>

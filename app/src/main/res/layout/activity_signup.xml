@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/signupBtn"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/whiteBackground"
         android:layout_below="@+id/passwordSignup"
         android:layout_marginTop="40dp"
         android:onClick="signUp"

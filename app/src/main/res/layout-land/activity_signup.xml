@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/signupBtn"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/whiteBackground"
         android:onClick="signUp"
         android:background="@drawable/button"
         android:layout_below="@+id/passwordSignup"
