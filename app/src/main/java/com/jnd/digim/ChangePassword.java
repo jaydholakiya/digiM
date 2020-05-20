@@ -54,7 +54,7 @@ public class ChangePassword extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Change Password");
 
         //Change password button
-        Button change = (Button)view.findViewById(R.id.change);
+        final Button change = (Button)view.findViewById(R.id.change);
 
         //Password change functionality
         change.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +64,14 @@ public class ChangePassword extends Fragment {
                 NetworkInfo activeNetwork =   conn_Manager.getActiveNetworkInfo();
                 if( activeNetwork != null && activeNetwork.isConnected() ) {
                     if( pass.getText().toString().length() >= 6 ){
+                        change.setEnabled(false);
                         progressBarDashboard.setVisibility(View.VISIBLE);
                         user.updatePassword(pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    change.setEnabled(true);
+
                                     //Hiding progressbar after success - changing password
                                     progressBarDashboard.setVisibility(View.GONE);
 
@@ -85,6 +88,8 @@ public class ChangePassword extends Fragment {
                                     Toast.makeText(getContext(), "Please login first", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
+                                    change.setEnabled(true);
+
                                     //Hiding progressbar after error - changing password
 
                                     progressBarDashboard.setVisibility(View.GONE);

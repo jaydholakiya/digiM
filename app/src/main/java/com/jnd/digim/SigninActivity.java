@@ -203,6 +203,7 @@ public class SigninActivity extends AppCompatActivity {
 
     //SignIn method
     public void signIn(View coordinatorLayout) {
+        final Button loginBtn = (Button)findViewById(R.id.loginBtn);
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
         EditText emailLogin = findViewById(R.id.emailLogin);
@@ -216,12 +217,14 @@ public class SigninActivity extends AppCompatActivity {
                 Snackbar.make(coordinatorLayout, "All fields are required",Snackbar.LENGTH_LONG).show();
             }
             else {
+                loginBtn.setEnabled(false);
                 progressBarSignin = (ProgressBar)findViewById(R.id.progressBarSignin);
                 progressBarSignin.setVisibility(View.VISIBLE);
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if ( task.isSuccessful() ) {
+                            loginBtn.setEnabled(true);
                             progressBarSignin.setVisibility(View.GONE);
                             Intent dashboardIntent = new Intent(SigninActivity.this,DashboardActivity.class);
                             startActivity(dashboardIntent);
@@ -229,6 +232,7 @@ public class SigninActivity extends AppCompatActivity {
                             Toast.makeText(SigninActivity.this, "Signin succesfully", Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            loginBtn.setEnabled(true);
                             progressBarSignin.setVisibility(View.GONE);
                             Toast.makeText(SigninActivity.this, "Authentication error...\nIt seems like wrong email or password", Toast.LENGTH_SHORT).show();
                         }

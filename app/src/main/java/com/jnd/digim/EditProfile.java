@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -75,11 +76,13 @@ public class EditProfile extends Fragment {
         }
 
         //Submitting the change - button
-        Button submitProfile = (Button)view.findViewById(R.id.submitProfile);
+        final Button submitProfile = (Button)view.findViewById(R.id.submitProfile);
 
         //Profile Picture image removing
         ImageView profilePicture = (ImageView)view.findViewById(R.id.profilePicture);
-        profilePicture.setImageURI(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
+        Glide.with(this)
+                .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                .into(profilePicture);
 
         removePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +150,7 @@ public class EditProfile extends Fragment {
                     }
 
                     else{
+                        submitProfile.setEnabled(false);
                         Users.put("firstname",firstNameEdit.getText().toString());
 //                      Users.put("email",emailEdit.getText().toString());
                         Users.put("lastname",lastNameEdit.getText().toString());
@@ -159,6 +163,9 @@ public class EditProfile extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
+
+                                    submitProfile.setEnabled(true);
+
                                     progressBarDashboard.setVisibility(View.GONE);
                                     Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
                                     Intent dashboard = new Intent(getActivity(),DashboardActivity.class);

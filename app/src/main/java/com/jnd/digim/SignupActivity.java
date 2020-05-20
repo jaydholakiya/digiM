@@ -112,6 +112,7 @@ public class SignupActivity extends AppCompatActivity {
 
     //For SignUp data
     public void signUp(View coordinatorLayout) {
+        final Button signUpBtn = (Button)findViewById(R.id.signUpBtn);
         final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBarSignUp);
         InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
@@ -134,12 +135,14 @@ public class SignupActivity extends AppCompatActivity {
             }
 
             else if ( fname.length() >= 3 && lname.length() >= 3 && ( email.length() > 1 || email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+") ) && password.length() >= 6 ) {
+                signUpBtn.setEnabled(false);
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if ( task.isSuccessful() ) {
                             storeData();
+                            signUpBtn.setEnabled(true);
                             Toast.makeText(SignupActivity.this, "Sign up with : " + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(SignupActivity.this, SigninActivity.class);
                             i.putExtra("Email",email);
@@ -148,6 +151,7 @@ public class SignupActivity extends AppCompatActivity {
                             finish();
                         }
                         else {
+                            signUpBtn.setEnabled(true);
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(SignupActivity.this, "Sign up error.", Toast.LENGTH_SHORT).show();
                         }
