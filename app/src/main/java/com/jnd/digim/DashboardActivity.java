@@ -149,17 +149,17 @@ public class DashboardActivity extends AppCompatActivity {
                 progressBarDashboard.setVisibility(View.VISIBLE);
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setPhotoUri(Uri.parse(String.valueOf(result.getUri()))).build();
                 FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        progressBarDashboard.setVisibility(View.GONE);
-                        Intent intent = new Intent(DashboardActivity.this,DashboardActivity.class);
-                        startActivity(intent);
-                        finish();
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            progressBarDashboard.setVisibility(View.GONE);
+                            Intent intent = new Intent(DashboardActivity.this,DashboardActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
             else if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception e = result.getError();
                 Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
@@ -172,18 +172,21 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.logOut){
-                        FirebaseAuth.getInstance().signOut();
-                        if( FirebaseAuth.getInstance().getCurrentUser() == null ) {
-                            Intent loginIntent = new Intent(DashboardActivity.this, HomeActivity.class);
-                            startActivity(loginIntent);
-                            finish();
-                        }
-                        else Toast.makeText(getApplicationContext(), "Log Out error", Toast.LENGTH_SHORT).show();
+                    mDrawer.closeDrawer(GravityCompat.START);
+                    FirebaseAuth.getInstance().signOut();
+                    if( FirebaseAuth.getInstance().getCurrentUser() == null ) {
+                        Intent homeIntent = new Intent(DashboardActivity.this, HomeActivity.class);
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(homeIntent);
+                        finish();
+                    }
+                    else Toast.makeText(getApplicationContext(), "Log Out error", Toast.LENGTH_SHORT).show();
                 }
                 else if(item.getItemId() == R.id.homeMain){
-                        Intent intent = new Intent(DashboardActivity.this,HomeActivity.class);
-                        startActivity(intent);
-                        finish();
+                    mDrawer.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(DashboardActivity.this,HomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else{
                     selectDrawerItem(item);

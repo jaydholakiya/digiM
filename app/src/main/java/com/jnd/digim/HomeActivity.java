@@ -136,6 +136,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.myDashboard){
+                    mDrawer.closeDrawer(GravityCompat.START);
                         Intent loginIntent = new Intent(HomeActivity.this, DashboardActivity.class);
                         startActivity(loginIntent);
                         finish();
