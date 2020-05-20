@@ -173,10 +173,15 @@ public class DashboardActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.logOut){
                     mDrawer.closeDrawer(GravityCompat.START);
+                    ProgressBar progressBarDashboard = (ProgressBar)findViewById(R.id.progressBarDashboard);
+                    progressBarDashboard.setVisibility(View.VISIBLE);
                     FirebaseAuth.getInstance().signOut();
                     if( FirebaseAuth.getInstance().getCurrentUser() == null ) {
+                        progressBarDashboard.setVisibility(View.GONE);
                         Intent homeIntent = new Intent(DashboardActivity.this, HomeActivity.class);
-                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        //For clearing the tasks when multiple "Logout" occurs
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(homeIntent);
                         finish();
                     }

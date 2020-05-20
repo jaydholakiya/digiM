@@ -1,13 +1,17 @@
 package com.jnd.digim;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -45,6 +49,12 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //Checking network connection for video
+        ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = conn_Manager.getActiveNetworkInfo();
+        if( activeNetwork != null && activeNetwork.isConnected() ) {}
+        else Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
 
         //Setting the toolbar as Action bar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -219,11 +229,11 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
     //Youtube video link initializing
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        youTubePlayer.loadVideo("0trAMd1GYVc");
+            youTubePlayer.loadVideo("0trAMd1GYVc");
     }
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
+        Toast.makeText(this, "Video loading failed", Toast.LENGTH_SHORT).show();
     }
 }

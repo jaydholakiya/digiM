@@ -1,6 +1,9 @@
 package com.jnd.digim;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +31,7 @@ public class EducationFragment extends Fragment {
 
         //Progressbar for page load
         final ProgressBar progressBarDashboard = (ProgressBar)((AppCompatActivity)getActivity()).findViewById(R.id.progressBarDashboard);
-
-        WebView web = (WebView)view.findViewById(R.id.blogURL);
+            WebView web = (WebView) view.findViewById(R.id.blogURL);
             web.loadUrl("https://neilpatel.com/blog");
             web.clearCache(true);
             web.clearHistory();
