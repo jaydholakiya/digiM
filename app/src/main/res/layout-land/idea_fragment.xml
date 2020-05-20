@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="No more ideas"
+        android:text="@string/no_more_ideas_text"
         android:textColor="@color/textColor"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerIdea"

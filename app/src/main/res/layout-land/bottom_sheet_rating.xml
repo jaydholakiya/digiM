@@ -19,7 +19,26 @@
         android:padding="5dp"
         android:shadowColor="@color/textColor"
         android:textColor="@color/textColor"
-        android:text="Promotion will take time to be done so be patient,we are finding best target market for you but if it also not done since long time tell us."
+        android:text="@string/ratingTagLine"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <TextView
+        android:id="@+id/rateText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:padding="5dp"
+        android:shadowColor="@color/textColor"
+        android:text="@string/ratingTagLine"
+        android:textColor="@color/textColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,14 +64,15 @@
         android:layout_height="49dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Write your complaints here..."
+        android:hint="@string/complainsHint"
         android:inputType="textMultiLine"
         android:imeOptions="flagNoExtractUi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.098"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/thanksText"
@@ -60,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/righteous"
-        android:text="Thanks for visiting"
+        android:text="@string/thanksForVisitingText"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,13 +92,14 @@
         android:id="@+id/rateUsSubmit"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="56dp"
         android:background="@drawable/button"
+        android:contentDescription="@string/rating_button"
         android:src="@drawable/ic_check_black_24dp"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/shareIdeaTxt"
+        app:layout_constraintBottom_toTopOf="@+id/rateText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

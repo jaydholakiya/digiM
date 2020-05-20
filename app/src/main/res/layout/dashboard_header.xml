@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
         android:gravity="center"
-        android:text="digiM"
+        android:text="@string/digiMHeader"
         android:textColor="@color/textColor"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -46,7 +45,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:layout_editor_absoluteX="156dp"
-                tools:layout_editor_absoluteY="373dp" />
+                tools:layout_editor_absoluteY="373dp"
+                android:contentDescription="@string/profile_picture_discription" />
 
         </androidx.cardview.widget.CardView>
 
@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="username"
-            android:layout_marginLeft="2dp"
+            android:text="@string/usernameText"
+            android:layout_marginStart="2dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:gravity="center"
             android:textColor="@color/textColor"

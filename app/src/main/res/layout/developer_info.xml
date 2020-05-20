@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
         android:fontFamily="@font/righteous"
-        android:text="Developer :"
+        android:text="@string/developerTitle"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,8 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="373dp" />
+            tools:layout_editor_absoluteY="373dp"
+            android:contentDescription="@string/developer_content_discription" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -44,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/righteous"
-        android:text="Jay Dholakiya"
+        android:text="@string/developerNameText"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
         android:fontFamily="@font/righteous"
-        android:text="Concept by :"
+        android:text="@string/conceptTitle"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +82,8 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="373dp" />
+            tools:layout_editor_absoluteY="373dp"
+            android:contentDescription="@string/concept_discription" />
 
     </androidx.cardview.widget.CardView>
 
@@ -91,7 +93,7 @@
         android:layout_height="37dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/righteous"
-        android:text="Yash Vyas"
+        android:text="@string/conceptantName"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"

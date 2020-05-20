@@ -16,7 +16,7 @@
         android:layout_marginTop="80dp"
         android:fontFamily="@font/righteous"
         android:shadowColor="@color/textColor"
-        android:text="Share your creative ideas here"
+        android:text="@string/shareIdeaLine"
         android:textColor="@color/textColor"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:layout_marginTop="88dp"
         android:imeOptions="flagNoExtractUi"
         android:ems="10"
-        android:hint="Share your creative ideas here..."
+        android:hint="@string/shareIdeaLine"
         android:inputType="textMultiLine"
         android:padding="10dp"
         android:textColor="@color/textColor"
@@ -41,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="@+id/shareIdeaTxt"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/shareIdeaTxt"
-        app:layout_constraintTop_toBottomOf="@+id/shareIdeaTxt" />
+        app:layout_constraintTop_toBottomOf="@+id/shareIdeaTxt"
+        android:importantForAutofill="no" />
 
     <ImageButton
         android:id="@+id/postIdea"
@@ -53,6 +54,7 @@
         app:layout_constraintBottom_toTopOf="@+id/shareIdeaTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/ideas_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="digiM"
+        android:text="@string/digiMHeader"
         android:layout_marginTop="25dp"
         android:textColor="@color/textColor"
         android:layout_centerHorizontal="true"
@@ -34,31 +34,33 @@
             android:id="@+id/firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="1dp"
+            android:layout_marginEnd="1dp"
             android:imeOptions="flagNoExtractUi"
             android:layout_weight="50"
-            android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:drawableEnd="@drawable/ic_verified_user_black_24dp"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-            android:hint="Name"
+            android:hint="@string/landscapeFirstNameHint"
             android:inputType="textFilter"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/lastName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:imeOptions="flagNoExtractUi"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_weight="50"
-            android:drawableRight="@drawable/ic_verified_user_black_24dp"
+            android:drawableEnd="@drawable/ic_verified_user_black_24dp"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-            android:hint="Surname"
+            android:hint="@string/landscapeSurnameHint"
             android:inputType="textFilter"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:importantForAutofill="no" />
     </LinearLayout>
     <EditText
         android:id="@+id/emailSignup"
@@ -67,13 +69,14 @@
         android:layout_below="@+id/linearNames"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:drawableRight="@drawable/ic_email_black_24dp"
-        android:hint="Email"
+        android:drawableEnd="@drawable/ic_email_black_24dp"
+        android:hint="@string/emailHint"
         android:imeOptions="flagNoExtractUi"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/textColor"
         android:textColor="@color/textColor"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/passwordSignup"
@@ -82,20 +85,21 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/emailSignup"
         android:layout_marginTop="20dp"
-        android:drawableRight="@drawable/ic_vpn_key_black_24dp"
-        android:hint="Password"
+        android:drawableEnd="@drawable/ic_vpn_key_black_24dp"
+        android:hint="@string/passwordHint"
         android:imeOptions="flagNoExtractUi"
         android:inputType="textPassword"
         android:textColorHint="@color/textColor"
         android:textColor="@color/textColor"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Sign Up"
+        android:text="@string/signupBtn"
         android:textColor="#FFFFFF"
         android:onClick="signUp"
         android:background="@drawable/button"
@@ -110,7 +114,7 @@
         android:layout_below="@+id/signUpBtn"
         android:paddingTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="Existing User? Sign in"
+        android:text="@string/alreadyAccountText"
         android:textColor="@color/textColor"
         android:textSize="20sp" />
     <ProgressBar

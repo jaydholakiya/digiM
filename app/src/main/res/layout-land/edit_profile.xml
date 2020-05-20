@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/loginLayout"
     android:background="@color/whiteBackground"
     android:padding="30dp"
@@ -31,17 +32,20 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="373dp" />
+            tools:layout_editor_absoluteY="373dp"
+            android:contentDescription="@string/profile_picture_discription" />
 
         <ImageButton
             android:id="@+id/removePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="#00000000"
-            android:src="@drawable/ic_close_black_24dp"></ImageButton>
+            android:src="@drawable/ic_close_black_24dp"
+            android:contentDescription="@string/removePicDiscription">
+        </ImageButton>
 
     </androidx.cardview.widget.CardView>
 
@@ -62,19 +66,19 @@
         android:id="@+id/firstNameEdit"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit"
         android:layout_marginTop="10dp"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        android:drawableRight="@drawable/ic_verified_user_black_24dp"
-        android:hint="First name"
+        android:drawableEnd="@drawable/ic_verified_user_black_24dp"
+        android:hint="@string/firstNameHint"
+        android:imeOptions="flagNoExtractUi"
+        android:importantForAutofill="no"
         android:inputType="textFilter"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="20sp"
-        android:imeOptions="flagNoExtractUi"
-        app:layout_constraintEnd_toEndOf="@+id/cardForProfile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/cardForProfile"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardForProfile" />
 
     <EditText
@@ -85,8 +89,8 @@
         android:layout_marginTop="10dp"
         android:imeOptions="flagNoExtractUi"
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        android:drawableRight="@drawable/ic_verified_user_black_24dp"
-        android:hint="Surname"
+        android:drawableEnd="@drawable/ic_verified_user_black_24dp"
+        android:hint="@string/surNameText"
         android:inputType="textFilter"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -94,7 +98,8 @@
         app:layout_constraintEnd_toEndOf="@+id/firstNameEdit"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/firstNameEdit"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEdit"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/submitProfile"
@@ -102,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lastNameEdit"
         android:background="@drawable/button"
-        android:text="Submit"
+        android:text="@string/submitBtnText"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:layout_marginTop="10dp"

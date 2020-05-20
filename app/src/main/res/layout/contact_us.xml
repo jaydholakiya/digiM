@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,53 +22,57 @@
             android:id="@+id/facebookIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/facebook_icon" />
+            app:srcCompat="@drawable/facebook_icon"
+            android:contentDescription="@string/facebook_icon" />
 
         <ImageView
             android:id="@+id/instagramIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/instagram_icon" />
+            app:srcCompat="@drawable/instagram_icon"
+            android:contentDescription="@string/instagram_icon" />
 
         <ImageView
             android:id="@+id/twitterIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/twitter_icon" />
+            app:srcCompat="@drawable/twitter_icon"
+            android:contentDescription="@string/twitter_icon" />
 
         <ImageView
             android:id="@+id/linkedinIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/contact"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/linkedin_icon" />
+            app:srcCompat="@drawable/linkedin_icon"
+            android:contentDescription="@string/linkedin_icon" />
 
 
     </LinearLayout>
@@ -80,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/righteous"
-        android:text="Communication Address"
+        android:text="@string/communicationAddressText"
         android:textColor="@color/textColor"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,9 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="Plot No. 1/B,
-        \nSuyog Bunglow,
-        \nPrahladnagar,Ahmedabad"
+        android:text="@string/addressText"
         android:textColor="@color/textColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="socialmefgi@gmail.com"
+        android:text="@string/emailText"
         android:textColor="@color/textColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android" >
@@ -14,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Select promotions :"
+        android:text="@string/select_promotions_text"
         android:textColor="@color/textColor"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/socialRadio"
@@ -35,39 +34,39 @@
             android:id="@+id/instagramRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="Instagram"
+            android:layout_marginEnd="5dp"
+            android:text="@string/instagramText"
             android:textColor="@color/textColor" />
 
         <RadioButton
             android:id="@+id/youtubeRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="Youtube"
+            android:layout_marginEnd="5dp"
+            android:text="@string/youtubeText"
             android:textColor="@color/textColor" />
 
         <RadioButton
             android:id="@+id/facebookRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="Facebook"
+            android:layout_marginEnd="5dp"
+            android:text="@string/facebookText"
             android:textColor="@color/textColor" />
 
         <RadioButton
             android:id="@+id/twitterRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="Twitter"
+            android:layout_marginEnd="5dp"
+            android:text="@string/twitterText"
             android:textColor="@color/textColor" />
 
         <RadioButton
             android:id="@+id/tiktokRadio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TikTok"
+            android:text="@string/tiktokText"
             android:textColor="@color/textColor" />
     </RadioGroup>
 
@@ -75,7 +74,7 @@
         android:id="@+id/promotionData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No promotion selected"
+        android:text="@string/no_promotion_selected_text"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/socialRadio"
@@ -89,26 +88,28 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:imeOptions="flagNoExtractUi"
-        android:hint="Paste your social media URL..."
+        android:hint="@string/paste_your_social_media_url_text"
         android:inputType="textMultiLine"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/socialRadio"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/socialRadio"
-        app:layout_constraintTop_toBottomOf="@+id/socialRadio" />
+        app:layout_constraintTop_toBottomOf="@+id/socialRadio"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/transactionId"
         android:layout_width="400dp"
         android:layout_height="50dp"
-        android:hint="Transaction Id"
+        android:hint="@string/transaction_id_text"
         android:imeOptions="flagNoExtractUi"
         android:layout_marginTop="5dp"
         android:inputType="text"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/urlLink"
         app:layout_constraintStart_toStartOf="@+id/urlLink"
-        app:layout_constraintTop_toBottomOf="@+id/urlLink" />
+        app:layout_constraintTop_toBottomOf="@+id/urlLink"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/mobileNo"
@@ -116,21 +117,22 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:imeOptions="flagNoExtractUi"
-        android:hint="Mobile No."
+        android:hint="@string/mobile_no_text"
         android:inputType="number"
         android:maxLength="10"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="@+id/transactionId"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/transactionId"
-        app:layout_constraintTop_toBottomOf="@+id/transactionId" />
+        app:layout_constraintTop_toBottomOf="@+id/transactionId"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/placeOrder"
         android:layout_width="400dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
-        android:text="Place Order"
+        android:text="@string/place_order_text"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/mobileNo"
         app:layout_constraintHorizontal_bias="0.0"
