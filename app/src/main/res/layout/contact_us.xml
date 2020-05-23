@@ -62,10 +62,10 @@
 
         <ImageView
             android:id="@+id/linkedinIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView4"
@@ -73,7 +73,6 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/linkedin_icon"
             android:contentDescription="@string/linkedin_icon" />
-
 
     </LinearLayout>
 

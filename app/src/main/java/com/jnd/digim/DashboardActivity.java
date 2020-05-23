@@ -9,6 +9,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -64,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
         //Setting the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
         //Setting profilePicture in header of Navigation drawer of dashboard
 
         final ImageView profilePic = (ImageView)headerView.findViewById(R.id.profilePic);
+
         Glide.with(this)
                 .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
                 .into(profilePic);

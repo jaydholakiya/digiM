@@ -1,8 +1,10 @@
 package com.jnd.digim;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -46,13 +50,13 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         //Checking network connection for video
         ConnectivityManager conn_Manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = conn_Manager.getActiveNetworkInfo();
+
         if( activeNetwork != null && activeNetwork.isConnected() ) {}
         else Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
 
@@ -65,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements YouTubePlayer.OnI
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Navigation icon of Actionbar
-        toolbar.setNavigationIcon(R.drawable.ic_menu_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,9 +21,9 @@
 
         <FrameLayout
             android:id="@+id/dashboardFrame"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="79dp"
-            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,14 +31,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:animateLayoutChanges="true"
                 android:background="@color/colorAccent"
                 android:clickable="true"
+                android:focusable="true"
                 app:itemIconSize="24dp"
                 app:itemIconTint="@color/common_google_signin_btn_text_dark"
-                app:itemRippleColor="@color/itemRippleColor"
                 app:itemTextColor="@color/colorPrimaryDark"
                 app:menu="@menu/menu" />
+
         </FrameLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -52,6 +52,7 @@
         </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
+
     <ProgressBar
         android:id="@+id/progressBarDashboard"
         style="?android:attr/progressBarStyle"

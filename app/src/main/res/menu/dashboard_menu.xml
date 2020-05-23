@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_edit_black_24dp"/>
         <item android:id="@+id/changePass"
             android:title="Change Password"
-            android:icon="@drawable/ic_change_password"/>
+            android:icon="@drawable/ic_password"/>
         <item android:id="@+id/rateUs"
             android:title="Rate Us"
             android:icon="@drawable/ic_rate_us_24dp"/>
